@@ -8,6 +8,8 @@ const initStaticComponents = (world: World) => {
     light: world.schemaManager.register(Type.Custom),
     shadowGenerator: world.schemaManager.register(Type.Custom),
     mesh: world.schemaManager.register(Type.Custom),
+    shadowsLight: world.schemaManager.register(Type.Tag),
+    rotatable: world.schemaManager.register(Type.Tag),
     loadable: world.schemaManager.register({
       path: Type.String,
       position: Type.Custom
@@ -16,10 +18,7 @@ const initStaticComponents = (world: World) => {
       file: Type.Custom,
       position: Type.Custom
     }),
-    pickable: world.schemaManager.register(Type.Tag),
-    picked: world.schemaManager.register(Type.Tag),
-    grabbed: world.schemaManager.register({ status : Type.Int8}),
-    grid: world.schemaManager.register(Type.Custom),
+    character: world.schemaManager.register(Type.Custom),
     meshGrid: world.schemaManager.register(Type.Custom),
     room: world.schemaManager.register({cellSize: Type.Float32}),
     dimensions: world.schemaManager.register({ width: Type.Float32, depth: Type.Float32, height: Type.Float32 }),
@@ -28,7 +27,6 @@ const initStaticComponents = (world: World) => {
     highlight: world.schemaManager.register(Type.Custom),
     rotation: world.schemaManager.register({angle: Type.Int32, orientation: Type.Int8}),
     invisibleWalls : world.schemaManager.register(Type.Custom),
-    furniture : world.schemaManager.register(Type.Tag)
   };
 
   return components;

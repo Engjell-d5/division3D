@@ -11,6 +11,8 @@ const initDirectionalLight = ({ world: w, components: c, entities: e }: ISystem)
     c.light,
     light
   );
+
+  w.entityManager.addComponent(e.directionalLight, c.shadowsLight);
 };
 
 export default initDirectionalLight;

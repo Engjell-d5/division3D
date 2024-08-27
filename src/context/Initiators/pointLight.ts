@@ -10,6 +10,8 @@ const initPointLight = ({ world: w, components: c, entities: e }: ISystem) => {
     c.light,
     light
   );
+
+  w.entityManager.addComponent(e.pointLight, c.shadowsLight);
 };
 
 export default initPointLight;

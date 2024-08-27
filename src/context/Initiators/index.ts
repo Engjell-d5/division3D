@@ -15,27 +15,13 @@ import { ImageProcessingConfiguration, Vector3 } from "@babylonjs/core";
 const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   const room = w.entityManager.create();
   w.entityManager.addComponent(room, c.loadable, {
-    path: "assets/models/bedroom.glb"
+    path: "assets/models/platform.glb"
   });
+  w.entityManager.addComponent(room, c.rotatable);
 
-  // const bed = w.entityManager.create();
-  // w.entityManager.addComponent(bed, c.loadable, {
-  //   path: "assets/models/furniture1.glb",
-  //   position: new Vector3(0.67, -1.3, 0)
-  // });
-
-  // w.entityManager.addComponent(bed, c.grid);
-  // w.entityManager.addComponent(bed, c.furniture);
-
-  // const bookcase = w.entityManager.create();
-
-  // w.entityManager.addComponent(bookcase, c.loadable, {
-  //   path: "assets/models/furniture2.glb",
-  //   position: new Vector3(1.50, -0.65, -1.65)
-  // });
-
-  // w.entityManager.addComponent(bookcase, c.grid);
-  // w.entityManager.addComponent(bookcase, c.furniture);
+  const elephant = w.entityManager.create();
+  w.entityManager.addComponent(elephant, c.loadable, {path: "assets/models/divi.glb"});
+  w.entityManager.addComponent(elephant, c.character);
 };
 
 const initWorld = (props: ISystem) => {
@@ -46,18 +32,14 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.contrast = Config.contrast;
   
   initCamera(props);
-  initAmbientLight(props);
   // initDirectionalLight(props);
+  initAmbientLight(props);
   initPointLight(props);
   initShadowGenerator(props);
   initSkybox(props);
   initReferencePlane(props);
   tempInitRoom(props);
-  initWorldGrid(props);
 
-  if(Config.debug) {
-    initMeshGrid(props);  
-  }
 };
 
 export default initWorld;

@@ -1,7 +1,6 @@
 import { ArcRotateCamera, Vector3 } from "@babylonjs/core";
 import ISystem from "../types";
 import { Config } from "../constants";
-import { cameraMove } from "../Systems/camera";
 
 const initCamera = (props: ISystem) => {
 
@@ -27,7 +26,6 @@ const initCamera = (props: ISystem) => {
 
   arcRotateCamera.position = Vector3.Zero();
 
-  arcRotateCamera.onViewMatrixChangedObservable.add(cameraMove(props))
 };
 
 export default initCamera;
