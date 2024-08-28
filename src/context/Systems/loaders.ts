@@ -3,6 +3,7 @@ import { GridStatus, ObjectHelpers } from "../enums";
 import ISystem from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
 import "@babylonjs/loaders";
+import { GridMaterial } from "@babylonjs/materials";
 
 
 export const loadObject =
@@ -47,6 +48,8 @@ export const loadObject =
             // mesh.enableEdgesRendering(0.9999);
             // mesh.edgesWidth = 2.0;
             // mesh.edgesColor = new Color4(1, 1, 1, 1);
+            // mesh.material = new GridMaterial("groundMaterial", w.scene);
+            // mesh.material.wireframe = true;
             // mesh.material.wireframe = true
           }
 

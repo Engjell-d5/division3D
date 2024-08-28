@@ -19,15 +19,20 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@babylonjs/core@^6.21.0":
-  version "6.21.0"
-  resolved "https://registry.yarnpkg.com/@babylonjs/core/-/core-6.21.0.tgz#6b815c9a18f38865b7d36270dcb912f0c4bf6d9d"
-  integrity sha512-8g+HPZ1aNKoqad/lq85iYngtGZIJh40Hkk2ybj9ilZOk53VAp6qYdm5TFCFhsYjuQeWzFT5a4QtiwskC8S8DUg==
+"@babylonjs/core@^7.22.5":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babylonjs/core/-/core-7.22.5.tgz#f7a15d97a62b53b9413c3110be581a1c9bebefb6"
+  integrity sha512-wHzKsgcSEYLAEMhPswDLbKYi5jJ+uRPsaak0aDVAtb9PVp5vrkRJWlRgNj+I5tvZf9CWVtRMNGueV9tGMPHHkQ==
 
-"@babylonjs/loaders@^6.22.1":
-  version "6.22.1"
-  resolved "https://registry.yarnpkg.com/@babylonjs/loaders/-/loaders-6.22.1.tgz#ac545d5ade8d45f4d9f9c2af1e3957fb8e20bad5"
-  integrity sha512-NGXiZaa1cK4g5UCZPTpGUtAW/l3LY+SQy6H0aYXkFLUZBjDSyc9TX6wfpG2aFjCiNX5NFB85ucgXhqu/KU4Xrg==
+"@babylonjs/loaders@^7.22.5":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babylonjs/loaders/-/loaders-7.22.5.tgz#4a08d43bd488d675cb29b3c1697be25193563f48"
+  integrity sha512-PUdvZHcrwzQMBLxqiDe8Ov6o89gcpcoAAJ1RmF3nwPcJ9n+U24vP+yW7BpDsQPxpaTyisS/i+lMMeZ0h6woXRw==
+
+"@babylonjs/materials@^7.22.5":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babylonjs/materials/-/materials-7.22.5.tgz#67cbf8e473a50215078249584d4766a673264a39"
+  integrity sha512-nLciEJev0tgOaQ9khbExQnZn2Pfnu4H35ULTwfXDMMuJvzUEqeqZJfPxdDynlOGjHpm5KWdT9Jw8NuFpelz4Fg==
 
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
