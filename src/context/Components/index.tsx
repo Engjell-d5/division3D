@@ -9,15 +9,14 @@ const initStaticComponents = (world: World) => {
     shadowGenerator: world.schemaManager.register(Type.Custom),
     mesh: world.schemaManager.register(Type.Custom),
     shadowsLight: world.schemaManager.register(Type.Tag),
+    wireframe : world.schemaManager.register(Type.Tag),
     rotatable: world.schemaManager.register(Type.Tag),
+    
     loadable: world.schemaManager.register({
       path: Type.String,
       position: Type.Custom
     }),
-    fileLoadable: world.schemaManager.register({
-      file: Type.Custom,
-      position: Type.Custom
-    }),
+   
     clickable: world.schemaManager.register(Type.Tag),
     character: world.schemaManager.register(Type.Custom),
     projectionCylinders: world.schemaManager.register(Type.Tag),

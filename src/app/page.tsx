@@ -18,7 +18,6 @@ export default function Home() {
         <Actions />
       </div>
 
-      <Tutorial show={showTutorial} onClose={onWatchLater} />
     </EcsProvider>
   );
 }

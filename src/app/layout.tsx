@@ -10,7 +10,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Crib v1",
-  description: "The first prototype for Crib",
+  description: "The first prototype for division3D",
 };
 
 export default function RootLayout({

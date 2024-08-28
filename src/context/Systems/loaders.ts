@@ -1,4 +1,4 @@
-import { AbstractMesh, SceneLoader, ShadowGenerator } from "@babylonjs/core";
+import { AbstractMesh, Color4, Mesh, SceneLoader, ShadowGenerator } from "@babylonjs/core";
 import { GridStatus, ObjectHelpers } from "../enums";
 import ISystem from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
@@ -20,7 +20,7 @@ export const loadObject =
         index >= 0;
         index--
       ) {
-        
+
         const entId = archeType.getEntityIdFromIndex(index);
 
         const path = archeType.getColumn(c.loadable).path[index];
@@ -35,21 +35,29 @@ export const loadObject =
 
         for (const mesh of result.meshes) {
           mesh.isPickable = false;
-            
-    
-            if(w.entityManager.hasComponent(e.shadowGenerator, c.shadowGenerator)) {
-              const shadowGenerator : ShadowGenerator = w.entityManager.getComponent(e.shadowGenerator, c.shadowGenerator)[w.entityManager.getArchTypeId(e.shadowGenerator)];
-              shadowGenerator.addShadowCaster(mesh);
-            }
-            mesh.receiveShadows = true;
-          
+
+
+          if (w.entityManager.hasComponent(e.shadowGenerator, c.shadowGenerator)) {
+            const shadowGenerator: ShadowGenerator = w.entityManager.getComponent(e.shadowGenerator, c.shadowGenerator)[w.entityManager.getArchTypeId(e.shadowGenerator)];
+            shadowGenerator.addShadowCaster(mesh);
+          }
+
+          if (w.entityManager.hasComponent(entId, c.wireframe) && mesh.material) {
+            (mesh as Mesh).convertToFlatShadedMesh();
+            // mesh.enableEdgesRendering();
+            // mesh.edgesWidth = 3.0;
+            // mesh.edgesColor = new Color4(0.5, 0.5, 1, 1);
+            // mesh.material.wireframe = true
+          }
+
+          mesh.receiveShadows = true;
+
         }
 
-        if(w.entityManager.hasComponent(entId, c.projectionCylinders))
-        {
+        if (w.entityManager.hasComponent(entId, c.projectionCylinders)) {
           mesh.setEnabled(false);
         }
-                
+
         w.entityManager.addComponent(entId, c.mesh, mesh);
       }
     };

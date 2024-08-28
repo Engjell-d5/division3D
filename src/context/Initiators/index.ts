@@ -26,6 +26,10 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   const elephant = w.entityManager.create();
   w.entityManager.addComponent(elephant, c.loadable, {path: "assets/models/divi.glb"});
   w.entityManager.addComponent(elephant, c.character);
+
+  const terrain = w.entityManager.create();
+  w.entityManager.addComponent(terrain, c.loadable, {path: "assets/models/terrain.glb"});
+  w.entityManager.addComponent(terrain, c.wireframe);
 };
 
 const initWorld = (props: ISystem) => {
