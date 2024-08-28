@@ -29,9 +29,50 @@ export const followMouse = ({ world: w, components: c, entities: e }: ISystem) =
 
       if(target.pickedPoint)
       {
-        console.log("looking at", target.pickedPoint);
         mesh.lookAt(new Vector3(-target.pickedPoint.x, -target.pickedPoint.y, target.pickedPoint.z))
       }
     }
   }
+};
+
+
+export const mouseUp = ({ world: w, components: c, entities: e }: ISystem) => async () => {
+  const [projectionArchetype] = w.query.with(c.projectionCylinders).with(c.mesh).execute();
+
+  if(!projectionArchetype)
+  {
+    return;
+  }
+ 
+  const projEntId = projectionArchetype.getEntityIdFromIndex(0)
+  
+  const projMesh : Mesh = projectionArchetype.getColumn(c.mesh)[0];
+
+  projMesh.setEnabled(false);
+  
+};
+
+export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => async () => {
+  const [charArchetype] = w.query.with(c.character).with(c.mesh).execute();
+  const [projectionArchetype] = w.query.with(c.projectionCylinders).with(c.mesh).execute();
+
+  if(!charArchetype || !projectionArchetype)
+  {
+    return;
+  }
+ 
+  const charEntId = charArchetype.getEntityIdFromIndex(0);
+
+  const charMesh : Mesh = charArchetype.getColumn(c.mesh)[0];
+
+  const projEntId = projectionArchetype.getEntityIdFromIndex(0)
+  
+  const projMesh : Mesh = projectionArchetype.getColumn(c.mesh)[0];
+
+  if(!projMesh.isEnabled())
+  {
+    projMesh.setEnabled(true);
+    projMesh.attachToBone(charMesh.getChildMeshes()[0].skeleton!.bones[0], charMesh);  
+  }
+ 
 };

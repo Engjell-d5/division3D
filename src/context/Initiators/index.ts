@@ -3,14 +3,11 @@ import initCamera from "./camera";
 import initLight from "./ambientLight";
 import initReferencePlane from "./referencePlane";
 import initSkybox from "./skybox";
-import initWorldGrid from "./worldGrid";
-import initMeshGrid from "./MeshGrid";
 import { Config } from "../constants";
 import initAmbientLight from "./ambientLight";
 import initDirectionalLight from "./directionalLight";
 import initShadowGenerator from "./shadowGenerator";
 import initPointLight from "./pointLight";
-import { ImageProcessingConfiguration, Vector3 } from "@babylonjs/core";
 
 const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   const platform = w.entityManager.create();
@@ -18,6 +15,13 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
     path: "assets/models/platform.glb"
   });
   w.entityManager.addComponent(platform, c.rotatable);
+
+  const projectionCylinder = w.entityManager.create();
+  w.entityManager.addComponent(projectionCylinder, c.loadable, {
+    path: "assets/models/projectionCylinder.glb"
+  });
+
+  w.entityManager.addComponent(projectionCylinder, c.projectionCylinders);
 
   const elephant = w.entityManager.create();
   w.entityManager.addComponent(elephant, c.loadable, {path: "assets/models/divi.glb"});
@@ -31,10 +35,11 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.exposure = Config.exposure;
   props.world.scene.imageProcessingConfiguration.contrast = Config.contrast;
   
+  
   initCamera(props);
-  // initDirectionalLight(props);
+  initDirectionalLight(props);
   initAmbientLight(props);
-  initPointLight(props);
+  // initPointLight(props);
   initShadowGenerator(props);
   initSkybox(props);
   initReferencePlane(props);
