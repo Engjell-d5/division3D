@@ -5,15 +5,11 @@ import initStaticEntities, { StaticEntities } from "./Entities";
 import initWorld from "./Initiators";
 import registerStaticSystems from "./Systems";
 import LoadingOverlay from "@/components/LoadingOverlay";
-import { AbstractMesh, ArcRotateCamera, Color3, Matrix, SceneLoader, Vector3 } from "@babylonjs/core";
-import { IModel } from "@/data/models";
-import Tutorial from "@/components/tutorial/Tutorial";
 
 interface EcsContextState {
   world: World; // World instance is exposed to all children
   components: ReturnType<typeof initStaticComponents>;
   entities: ReturnType<typeof initStaticEntities>;
-  addItem: (item: IModel) => void;
   isObjectPicked: boolean;
 }
 
@@ -22,12 +18,11 @@ const EcsContext = React.createContext<EcsContextState>({
   world: null!,
   components: null!,
   entities: null!,
-  addItem: () => {},
   isObjectPicked: false,
 });
 
 interface ProviderProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const MAX_ENTITIES = 1000;
@@ -68,32 +63,6 @@ export const EcsProvider = (props: ProviderProps) => {
 
     initWorld(props);
 
-    canvas.addEventListener(
-      "drop",
-      (event) => {
-        event.preventDefault();
-        console.log("something was dropped");
-
-        const files = event.dataTransfer!.files;
-
-        //Temporary, needs to be cleaned up
-        for (const file of files) {
-          const newItem = world.entityManager.create();
-
-          world.entityManager.addComponent(
-            newItem,
-            components.current.fileLoadable,
-            {
-              file: file,
-            }
-          );
-
-          world.entityManager.addComponent(newItem, components.current.grid);
-        }
-      },
-      false
-    );
-
     registerStaticSystems({
       ...props,
       onSceneReady: () => setIsLoading(false),
@@ -104,26 +73,7 @@ export const EcsProvider = (props: ProviderProps) => {
     props.world.initRender();
   }, []);
 
-  const handleAddItem = (item: IModel) => {
-    const newItem = world.entityManager.create();
-
-   
-
-    world.entityManager.addComponent(newItem, components.current.grid);
-
-    const camera : ArcRotateCamera = world.entityManager.getComponent(entities.current.camera, components.current.camera)[world.entityManager.getArchTypeId(entities.current.camera)];
-
-    const forward = camera.getDirection(Vector3.Forward());
-
-    const position = camera.position.clone();
-
-    position.addInPlace(forward.normalize().scale(1.5));
-
-    world.entityManager.addComponent(newItem, components.current.loadable, {
-      path: item.glb,
-      position
-    });
-  };
+  
 
   return (
     <EcsContext.Provider
@@ -131,7 +81,6 @@ export const EcsProvider = (props: ProviderProps) => {
         world,
         components: components.current,
         entities: entities.current,
-        addItem: handleAddItem,
         isObjectPicked,
       }}
     >

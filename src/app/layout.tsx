@@ -9,7 +9,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Crib v1",
+  title: "division3D - We bring your ideas to life.",
   description: "The first prototype for division3D",
 };
 

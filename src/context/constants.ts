@@ -26,9 +26,10 @@ export const Config : IConfig = {
     wallsVisibility: 0.5,
     wallsVisibilityThreshhold: 0.7,
     wallsVisibilityDistance: 3,
+    
     toneMappingEnabled: true,
     toneMappingType: ImageProcessingConfiguration.TONEMAPPING_ACES,
     exposure: 1.5,
-    contrast: 1.0
+    contrast: 1.5
 }
   

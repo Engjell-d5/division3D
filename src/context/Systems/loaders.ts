@@ -43,10 +43,10 @@ export const loadObject =
           }
 
           if (w.entityManager.hasComponent(entId, c.wireframe) && mesh.material) {
-            (mesh as Mesh).convertToFlatShadedMesh();
-            // mesh.enableEdgesRendering();
-            // mesh.edgesWidth = 3.0;
-            // mesh.edgesColor = new Color4(0.5, 0.5, 1, 1);
+            // (mesh as Mesh).convertToFlatShadedMesh();
+            // mesh.enableEdgesRendering(0.9999);
+            // mesh.edgesWidth = 2.0;
+            // mesh.edgesColor = new Color4(1, 1, 1, 1);
             // mesh.material.wireframe = true
           }
 
