@@ -9,14 +9,9 @@ export default interface ISystem {
   entities: StaticEntities;
 }
 
-export interface IDimensions {
-  width: number,
-  height: number,
-  depth: number
-}
-
-export interface IGridDebugColor {
-  [key: number]: Color4;
+export interface ILandmark {
+  position: Vector3,
+  path: string
 }
 
 export interface IConfig {

@@ -1,11 +1,13 @@
 import { Color3, Color4, ImageProcessingConfiguration, Vector3 } from "@babylonjs/core";
-import { IGridDebugColor, IConfig } from "./types";
+import { IConfig, ILandmark } from "./types";
 
-export const GridHelperColors : IGridDebugColor = {
-    0 : new Color4(0.3, 0.3, 0.3, 0.00),
-    1 : new Color4(1,0.2,0.2,1.0),
-    2 : new Color4(0,0.0,0.2,1.0)
+
+export const Landmarks : Array<ILandmark> = [
+  {
+    position: new Vector3(-2, 0, 2),
+    path: "assets/models/platform.glb"
   }
+];
 
 export const Config : IConfig = {
     debug : false,

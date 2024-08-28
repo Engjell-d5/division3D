@@ -38,23 +38,27 @@ export const loadObject =
           mesh.isPickable = false;
 
 
-          if (w.entityManager.hasComponent(e.shadowGenerator, c.shadowGenerator)) {
-            const shadowGenerator: ShadowGenerator = w.entityManager.getComponent(e.shadowGenerator, c.shadowGenerator)[w.entityManager.getArchTypeId(e.shadowGenerator)];
-            shadowGenerator.addShadowCaster(mesh);
+          if (w.entityManager.hasComponent(e.shadowGenerator, c.shadowGenerator) && w.entityManager.hasComponent(entId, c.shadows)) {
+            
+            const receives = w.entityManager.getComponent(entId, c.shadows).receives[w.entityManager.getArchTypeId(entId)];
+            const casts = w.entityManager.getComponent(entId, c.shadows).casts[w.entityManager.getArchTypeId(entId)];
+
+            mesh.receiveShadows = receives;
+
+            if(casts) {
+              const shadowGenerator: ShadowGenerator = w.entityManager.getComponent(e.shadowGenerator, c.shadowGenerator)[w.entityManager.getArchTypeId(e.shadowGenerator)];
+              shadowGenerator.addShadowCaster(mesh);
+            }
           }
 
-          if (w.entityManager.hasComponent(entId, c.wireframe) && mesh.material) {
+          if (w.entityManager.hasComponent(entId, c.flat) && mesh.material) {
             (mesh as Mesh).convertToFlatShadedMesh();
-            // mesh.enableEdgesRendering(0.9999);
-            // mesh.edgesWidth = 1.0;
-            // mesh.edgesColor = new Color4(1, 1, 1, 1);
-            // mesh.material = new GridMaterial("groundMaterial", w.scene);
-            // mesh.material.wireframe = true;
-            // mesh.material.wireframe = true
           }
-
-          mesh.receiveShadows = true;
-
+        }
+        
+        if (w.entityManager.hasComponent(entId, c.position)) {
+          const position = w.entityManager.getComponent(entId, c.position)[w.entityManager.getArchTypeId(entId)];
+          mesh.position = position;
         }
 
         if (w.entityManager.hasComponent(entId, c.projectionCylinders)) {

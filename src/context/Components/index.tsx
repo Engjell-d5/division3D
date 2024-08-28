@@ -9,9 +9,10 @@ const initStaticComponents = (world: World) => {
     shadowGenerator: world.schemaManager.register(Type.Custom),
     mesh: world.schemaManager.register(Type.Custom),
     shadowsLight: world.schemaManager.register(Type.Tag),
-    wireframe : world.schemaManager.register(Type.Tag),
+    flat : world.schemaManager.register(Type.Tag),
     rotatable: world.schemaManager.register(Type.Tag),
-    
+    shadows: world.schemaManager.register({ casts: Type.Boolean, receives: Type.Boolean}),
+
     loadable: world.schemaManager.register({
       path: Type.String,
       position: Type.Custom
