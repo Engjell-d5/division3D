@@ -26,6 +26,12 @@ export interface IConfig {
   cameraScrollSpeed: number,
   cameraLowerLimit: number,
   cameraUpperLimit: number,
+  cameraLowerAlpha: number,
+  cameraUpperAlpha: number,
+  cameraLowerBeta: number,
+  cameraUpperBeta: number,
+  cameraPosition: Vector3,
+
   cameraFOV: number,
   ambientLightColor: Color3,
   ambientLightIntensity: number,

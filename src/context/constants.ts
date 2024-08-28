@@ -1,4 +1,4 @@
-import { Color3, Color4, ImageProcessingConfiguration } from "@babylonjs/core";
+import { Color3, Color4, ImageProcessingConfiguration, Vector3 } from "@babylonjs/core";
 import { IGridDebugColor, IConfig } from "./types";
 
 export const GridHelperColors : IGridDebugColor = {
@@ -13,7 +13,13 @@ export const Config : IConfig = {
     blockMovement : false,
     cameraScrollSpeed : 0.01,
     cameraLowerLimit : 3,
-    cameraUpperLimit : 3,
+    cameraUpperLimit : 5,
+    cameraLowerAlpha: Math.PI / 2,
+    cameraUpperAlpha: Math.PI / 2,
+    cameraLowerBeta: Math.PI / 2.5,
+    cameraUpperBeta: Math.PI / 2.5,
+    cameraPosition: new Vector3(0, 0.2, 0),
+
     cameraFOV: 1.0,
     ambientLightColor: new Color3(255/255, 100/255, 0/255),
     ambientLightIntensity: 0.2,

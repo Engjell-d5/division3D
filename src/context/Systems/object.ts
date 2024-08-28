@@ -1,10 +1,10 @@
+import { Space, Vector3 } from "@babylonjs/core";
 import ISystem from "../types";
 
 export const rotateObject = ({ world: w, components: c, entities: e }: ISystem) => async () => {
   const archetypes = w.query.with(c.rotatable).with(c.mesh).execute();
 
   if (archetypes.length <= 0) {
-    console.info("[rotate]: No archetype found");
     return null;
   }
 
@@ -19,8 +19,8 @@ export const rotateObject = ({ world: w, components: c, entities: e }: ISystem) 
 
       const mesh = archeType.getColumn(c.mesh)[index];
 
-      console.log(mesh.rotation);
-      mesh.rotation.y += 0.1;
+      // console.log(mesh.rotation);
+      mesh.rotate(new Vector3(0, 1, 0), -0.02, Space.WORLD);
 
     }
   }

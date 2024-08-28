@@ -12,7 +12,7 @@ const initCamera = (props: ISystem) => {
     -Math.PI,
     Math.PI / 2.5,
     15,
-    new Vector3(0, 0, 0)
+    Config.cameraPosition
   );
 
   w.entityManager.addComponent(e.camera, c.camera, arcRotateCamera);
@@ -21,10 +21,13 @@ const initCamera = (props: ISystem) => {
 
   arcRotateCamera.lowerRadiusLimit = Config.cameraLowerLimit;
   arcRotateCamera.upperRadiusLimit = Config.cameraUpperLimit;
+  arcRotateCamera.lowerAlphaLimit = Config.cameraLowerAlpha;
+  arcRotateCamera.upperAlphaLimit = Config.cameraUpperAlpha;
+  arcRotateCamera.lowerBetaLimit = Config.cameraLowerBeta;
+  arcRotateCamera.upperBetaLimit = Config.cameraUpperBeta;
+
   arcRotateCamera.wheelPrecision = 1 / Config.cameraScrollSpeed;
   arcRotateCamera.fov = Config.cameraFOV;
-
-  arcRotateCamera.position = Vector3.Zero();
 
 };
 

@@ -13,11 +13,11 @@ import initPointLight from "./pointLight";
 import { ImageProcessingConfiguration, Vector3 } from "@babylonjs/core";
 
 const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
-  const room = w.entityManager.create();
-  w.entityManager.addComponent(room, c.loadable, {
+  const platform = w.entityManager.create();
+  w.entityManager.addComponent(platform, c.loadable, {
     path: "assets/models/platform.glb"
   });
-  w.entityManager.addComponent(room, c.rotatable);
+  w.entityManager.addComponent(platform, c.rotatable);
 
   const elephant = w.entityManager.create();
   w.entityManager.addComponent(elephant, c.loadable, {path: "assets/models/divi.glb"});

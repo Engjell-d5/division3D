@@ -29,6 +29,21 @@ export const loadCharacter =
 
           const result = await SceneLoader.ImportMeshAsync("", path);
 
+          let mesh = result.meshes[0];
+
+          for (const mesh of result.meshes) {
+            mesh.isPickable = false;
+              
+      
+              if(w.entityManager.hasComponent(e.shadowGenerator, c.shadowGenerator)) {
+                const shadowGenerator : ShadowGenerator = w.entityManager.getComponent(e.shadowGenerator, c.shadowGenerator)[w.entityManager.getArchTypeId(e.shadowGenerator)];
+                shadowGenerator.addShadowCaster(mesh);
+              }
+              mesh.receiveShadows = true;
+            
+          }
+                  
+          w.entityManager.addComponent(entId, c.mesh, mesh);
         }
       }
     };
@@ -41,7 +56,7 @@ export const loadStatic =
       const [archeType] = w.query.with(c.loadable).without(c.character).execute();
 
       if (!archeType) {
-        console.info("[loadStatic]: No archetype found");
+        // console.info("[loadStatic]: No archetype found");
         return null;
       }
 
@@ -60,6 +75,8 @@ export const loadStatic =
         const result = await SceneLoader.ImportMeshAsync("", path);
 
         let mesh = result.meshes[0];
+
+        // console.log(mesh);
 
         for (const mesh of result.meshes) {
           mesh.isPickable = false;

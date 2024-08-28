@@ -18,6 +18,7 @@ const initStaticComponents = (world: World) => {
       file: Type.Custom,
       position: Type.Custom
     }),
+    clickable: world.schemaManager.register(Type.Tag),
     character: world.schemaManager.register(Type.Custom),
     meshGrid: world.schemaManager.register(Type.Custom),
     room: world.schemaManager.register({cellSize: Type.Float32}),

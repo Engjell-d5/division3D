@@ -11,9 +11,9 @@ const initReferencePlane = ({ world: w, components: c, entities: e }: ISystem) =
   );
 
   plane.visibility = 0;
-  plane.position.z += 200;
-  plane.rotation.y += 1.56;
-  plane.isPickable = false;
+  plane.position.z -= 10;
+  plane.rotation.y += 1.56 * 2;
+  plane.isPickable = true;
 };
 
 export default initReferencePlane;
