@@ -38,6 +38,10 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.toneMappingType = Config.toneMappingType;
   props.world.scene.imageProcessingConfiguration.exposure = Config.exposure;
   props.world.scene.imageProcessingConfiguration.contrast = Config.contrast;
+
+  props.world.scene.imageProcessingConfiguration.vignetteEnabled = true;
+  props.world.scene.imageProcessingConfiguration.vignetteWeight = 2;
+  
   
   
   initCamera(props);
