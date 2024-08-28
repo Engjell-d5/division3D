@@ -35,9 +35,9 @@ export interface IConfig {
   cameraFOV: number,
   ambientLightColor: Color3,
   ambientLightIntensity: number,
-  wallsVisibility: number,
-  wallsVisibilityDistance: number,
-  wallsVisibilityThreshhold: number,
+
+  directionalLightIntensity: number,
+  
   toneMappingEnabled: boolean,
   toneMappingType: number,
   exposure: number,

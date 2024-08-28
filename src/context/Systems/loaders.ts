@@ -44,9 +44,9 @@ export const loadObject =
           }
 
           if (w.entityManager.hasComponent(entId, c.wireframe) && mesh.material) {
-            // (mesh as Mesh).convertToFlatShadedMesh();
+            (mesh as Mesh).convertToFlatShadedMesh();
             // mesh.enableEdgesRendering(0.9999);
-            // mesh.edgesWidth = 2.0;
+            // mesh.edgesWidth = 1.0;
             // mesh.edgesColor = new Color4(1, 1, 1, 1);
             // mesh.material = new GridMaterial("groundMaterial", w.scene);
             // mesh.material.wireframe = true;

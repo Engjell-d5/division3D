@@ -21,11 +21,11 @@ const initSkybox = ({ world: w, components: c, entities: e }: ISystem) => {
   skyboxMaterial.backFaceCulling = true;
   skyboxMaterial.reflectionTexture = texture;
   skyboxMaterial.reflectionTexture.coordinatesMode = Texture.SKYBOX_MODE;
-  skyboxMaterial.disableLighting = true;
+  skyboxMaterial.disableLighting = false;
   skyboxMaterial.microSurface = 0.7;
   skybox.material = skyboxMaterial;
 
-  w.scene.clearColor = new Color4(0, 0, 0.2);
+  w.scene.clearColor = new Color4(0.1, 0.1, 0.2);
 };
 
 export default initSkybox;

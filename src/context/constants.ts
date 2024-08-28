@@ -11,6 +11,7 @@ export const Config : IConfig = {
     debug : false,
     cellSize: 0.0628,
     blockMovement : false,
+    
     cameraScrollSpeed : 0.01,
     cameraLowerLimit : 3,
     cameraUpperLimit : 5,
@@ -23,9 +24,8 @@ export const Config : IConfig = {
     cameraFOV: 1.0,
     ambientLightColor: new Color3(255/255, 100/255, 0/255),
     ambientLightIntensity: 0.2,
-    wallsVisibility: 0.5,
-    wallsVisibilityThreshhold: 0.7,
-    wallsVisibilityDistance: 3,
+
+    directionalLightIntensity: 1.2,
     
     toneMappingEnabled: true,
     toneMappingType: ImageProcessingConfiguration.TONEMAPPING_ACES,
