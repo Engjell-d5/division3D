@@ -63,11 +63,11 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.exposure = Config.exposure;
   props.world.scene.imageProcessingConfiguration.contrast = Config.contrast;
 
-  props.world.scene.imageProcessingConfiguration.vignetteEnabled = false;
-  props.world.scene.imageProcessingConfiguration.vignetteWeight = 2;
+  props.world.scene.imageProcessingConfiguration.vignetteEnabled = true;
+  props.world.scene.imageProcessingConfiguration.vignetteWeight = 0.5;
 
   props.world.scene.fogEnabled =  true;
-  props.world.scene.fogDensity = 0.012;
+  props.world.scene.fogDensity = 0.011;
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
   
