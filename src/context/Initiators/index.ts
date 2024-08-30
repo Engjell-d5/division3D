@@ -40,6 +40,10 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(terrain, c.flat);
   w.entityManager.addComponent(terrain, c.shadows, { casts: false, receives: true});
 
+  const dome = w.entityManager.create();
+  w.entityManager.addComponent(dome, c.loadable, {path: "assets/models/dome.glb"});
+  w.entityManager.addComponent(dome, c.shadows, { casts: false, receives: false});
+
 
   for( const landmarkDef of Landmarks) {
     const landmark = w.entityManager.create();
@@ -62,9 +66,9 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.vignetteEnabled = false;
   props.world.scene.imageProcessingConfiguration.vignetteWeight = 2;
 
-  props.world.scene.fogEnabled =  false;
-  props.world.scene.fogDensity = 0.005;
-  props.world.scene.fogColor = Color3.Blue();
+  props.world.scene.fogEnabled =  true;
+  props.world.scene.fogDensity = 0.012;
+  props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
   
 
