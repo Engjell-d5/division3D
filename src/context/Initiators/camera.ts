@@ -32,7 +32,7 @@ const initCamera = (props: ISystem) => {
         },
         {
           frame: 120, 
-          value: 10,
+          value: 1000,
         }, 
       ]
     }

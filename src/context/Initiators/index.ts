@@ -7,7 +7,7 @@ import { Config, Landmarks } from "../constants";
 import initAmbientLight from "./ambientLight";
 import initDirectionalLight from "./directionalLight";
 import initShadowGenerator from "./shadowGenerator";
-import { BloomEffect, Color3, Color4, DefaultRenderingPipeline, GlowLayer, Scene } from "@babylonjs/core";
+import { BloomEffect, Color3, Color4, DefaultRenderingPipeline, GlowLayer, Scene, Vector3 } from "@babylonjs/core";
 import initFireflies from "./particleSystems";
 
 
@@ -39,6 +39,14 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(terrain, c.loadable, {path: "assets/models/terrain.glb"});
   w.entityManager.addComponent(terrain, c.flat);
   w.entityManager.addComponent(terrain, c.shadows, { casts: false, receives: true});
+
+  
+  const tree = w.entityManager.create();
+  w.entityManager.addComponent(tree, c.loadable, {path: "assets/models/tree.glb"});
+  w.entityManager.addComponent(tree, c.shadows, { casts: true, receives: true});
+  w.entityManager.addComponent(tree, c.position, new Vector3(5, 0, -2));
+
+
 
   const dome = w.entityManager.create();
   w.entityManager.addComponent(dome, c.loadable, {path: "assets/models/dome.glb"});
