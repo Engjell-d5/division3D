@@ -23,7 +23,8 @@ const initStaticComponents = (world: World) => {
     projectionCylinders: world.schemaManager.register(Type.Tag),
 
     highlight: world.schemaManager.register(Type.Custom),
-    gpuParticleSystem: world.schemaManager.register(Type.Custom)
+    gpuParticleSystem: world.schemaManager.register(Type.Custom),
+    animation: world.schemaManager.register(Type.Custom)
   };
 
   return components;

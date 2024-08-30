@@ -1,5 +1,5 @@
 import { ArcRotateCamera, Vector3 } from "@babylonjs/core";
-import ISystem from "../types";
+import ISystem, { IAnimation } from "../types";
 import { Config } from "../constants";
 
 const initCamera = (props: ISystem) => {
@@ -15,7 +15,23 @@ const initCamera = (props: ISystem) => {
     Config.cameraPosition
   );
 
+  const animations : Array<IAnimation> = [
+    {
+      duration: 10,
+      property: "position",
+      startValue: 1,
+      endValue: 10,
+      enabled: true,
+      startTime: 0,
+      created: false
+    }
+  ];
+
   w.entityManager.addComponent(e.camera, c.camera, arcRotateCamera);
+
+
+
+  w.entityManager.addComponent(e.camera, c.animation, animations);
 
   arcRotateCamera.attachControl(w.canvas);
 
