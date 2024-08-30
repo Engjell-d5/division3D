@@ -14,7 +14,7 @@ const initFireflies = ({ world: w, components: c, entities: e }: ISystem) => {
   fireflies.maxEmitPower = 0.1;
   fireflies.direction1 = new Vector3(-1, -1, -1);
   fireflies.direction2 = new Vector3(1, 1, 1);
-  fireflies.applyFog = false;
+  fireflies.applyFog = true;
   fireflies.emitRate = 10000;
   fireflies.emitter = new Vector3(0, 0, 0);
   fireflies.particleTexture = new Texture("images/firefly.png", w.scene);
