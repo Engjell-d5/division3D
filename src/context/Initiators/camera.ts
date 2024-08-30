@@ -15,57 +15,6 @@ const initCamera = (props: ISystem) => {
     Config.cameraPosition
   );
 
-  const animations : Array<IAnimation> = [
-    {
-      name: "initialCameraMovement",
-      fps: 30,
-      property: "lowerRadiusLimit",
-      enabled: true,
-      startFrame: 0,
-      created: false,
-      loop: false,
-      callback: () => {
-        w.entityManager.addComponent(e.glow, c.customAnimation, [{ step: 2, currentFrame: 0, property: "intensity", minValue: 0, maxValue: 0.5, duration: 120, callback : () => {
-          const animations : Array<IAnimation> = [
-            {
-              name: "initialCameraMovement",
-              fps: 30,
-              property: "lowerRadiusLimit",
-              enabled: true,
-              startFrame: 0,
-              created: false,
-              loop: false,
-              callback : () => {},
-              animationType: Animation.ANIMATIONTYPE_FLOAT,
-              keyFrames: [
-                {
-                  frame: 0, 
-                  value: 0.5,
-                },
-                {
-                  frame: 120, 
-                  value: Config.cameraUpperLimit,
-                }
-              ]
-              }
-            ];
-
-        } }]);
-      },
-      animationType: Animation.ANIMATIONTYPE_FLOAT,
-      keyFrames: [
-        {
-          frame: 0, 
-          value: 0.5,
-        },
-        {
-          frame: 120, 
-          value: Config.cameraUpperLimit,
-        }, 
-      ]
-    }
-  ];
-
 
   const dfp = new DefaultRenderingPipeline("default", true, w.scene, [arcRotateCamera], true);
   dfp.samples = 4;
@@ -73,9 +22,6 @@ const initCamera = (props: ISystem) => {
 
 
   w.entityManager.addComponent(e.camera, c.camera, arcRotateCamera);
-
-
-  w.entityManager.addComponent(e.camera, c.standardAnimation, animations);
 
   arcRotateCamera.attachControl(w.canvas);
 

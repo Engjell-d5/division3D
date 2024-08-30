@@ -19,7 +19,7 @@ const initStaticComponents = (world: World) => {
     }),
    
     clickable: world.schemaManager.register(Type.Tag),
-    cutscene: world.schemaManager.register(Type.Tag),
+    onCutscene: world.schemaManager.register(Type.Tag),
     character: world.schemaManager.register(Type.Custom),
     projectionCylinders: world.schemaManager.register(Type.Tag),
 
@@ -27,7 +27,9 @@ const initStaticComponents = (world: World) => {
     gpuParticleSystem: world.schemaManager.register(Type.Custom),
     standardAnimation: world.schemaManager.register(Type.Custom),
     customAnimation : world.schemaManager.register(Type.Custom),
-    glow: world.schemaManager.register(Type.Custom)
+    glow: world.schemaManager.register(Type.Custom),
+    custscene: world.schemaManager.register(Type.Custom),
+    
   };
 
   return components;
