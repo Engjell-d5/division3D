@@ -18,7 +18,7 @@ const initCamera = (props: ISystem) => {
   const animations : Array<IAnimation> = [
     {
       name: "initialCameraMovement",
-      duration: 120,
+      fps: 30,
       property: "position.z",
       enabled: true,
       startFrame: 0,
@@ -40,11 +40,8 @@ const initCamera = (props: ISystem) => {
 
 
   const dfp = new DefaultRenderingPipeline("default", true, w.scene, [arcRotateCamera], true);
-
   dfp.samples = 4;
 
-  // const glow = new GlowLayer("glow", w.scene);
-  // glow.intensity = 0.5;
 
 
   w.entityManager.addComponent(e.camera, c.camera, arcRotateCamera);
