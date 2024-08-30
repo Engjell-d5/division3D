@@ -28,7 +28,7 @@ const initStaticComponents = (world: World) => {
     standardAnimation: world.schemaManager.register(Type.Custom),
     customAnimation : world.schemaManager.register(Type.Custom),
     glow: world.schemaManager.register(Type.Custom),
-    custscene: world.schemaManager.register(Type.Custom),
+    cutsceneMaster: world.schemaManager.register(Type.Custom),
     
   };
 

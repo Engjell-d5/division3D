@@ -10,15 +10,16 @@ import initShadowGenerator from "./shadowGenerator";
 import { BloomEffect, Color3, Color4, DefaultRenderingPipeline, GlowLayer, Scene, Vector3 } from "@babylonjs/core";
 import initFireflies from "./particleSystems";
 import initGlow from "./glow";
+import initAnimationMaster from "./animationMaster";
 
 
 const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
-  const platform = w.entityManager.create();
-  w.entityManager.addComponent(platform, c.loadable, {
+  e.platform = w.entityManager.create();
+  w.entityManager.addComponent(e.platform, c.loadable, {
     path: "assets/models/platform.glb"
   });
-  w.entityManager.addComponent(platform, c.rotatable);
-  w.entityManager.addComponent(platform, c.shadows, { casts: true, receives: true});
+  // w.entityManager.addComponent(e.platform, c.rotatable);
+  w.entityManager.addComponent(e.platform, c.shadows, { casts: true, receives: true});
 
 
   const projectionCylinder = w.entityManager.create();
@@ -30,11 +31,11 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
 
   w.entityManager.addComponent(projectionCylinder, c.projectionCylinders);
 
-  const elephant = w.entityManager.create();
-  w.entityManager.addComponent(elephant, c.loadable, {path: "assets/models/divi.glb"});
-  w.entityManager.addComponent(elephant, c.character);
-  w.entityManager.addComponent(elephant, c.cutscene);
-  w.entityManager.addComponent(elephant, c.shadows, { casts: true, receives: true});
+  e.character = w.entityManager.create();
+  w.entityManager.addComponent(e.character, c.loadable, {path: "assets/models/divi.glb"});
+  w.entityManager.addComponent(e.character, c.character);
+  w.entityManager.addComponent(e.character, c.onCutscene);
+  w.entityManager.addComponent(e.character, c.shadows, { casts: true, receives: true});
 
 
   const terrain = w.entityManager.create();
@@ -93,6 +94,7 @@ const initWorld = (props: ISystem) => {
   initFireflies(props);
   tempInitRoom(props);
   initGlow(props);
+  initAnimationMaster(props);
 
 };
 

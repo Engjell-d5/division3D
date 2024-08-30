@@ -24,6 +24,9 @@ export const followMouse = ({ world: w, components: c, entities: e }: ISystem) =
 
       const mesh : Mesh = archeType.getColumn(c.mesh)[index];
 
+      if(w.scene.pointerX === 0 && w.scene.pointerY === 0) {
+        return;
+      }
 
       const target = w.scene.pick(w.scene.pointerX, w.scene.pointerY);
 

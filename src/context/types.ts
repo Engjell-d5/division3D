@@ -24,8 +24,8 @@ export interface IAnimation {
   keyFrames: Array<IKeyFrame>,
   animationType: number,
   loop: boolean,
-  callback: Function,
-  animationMaster: number
+  animationMaster: number,
+  callback: Function
 }
 
 export interface ICustomAnimation {
@@ -35,20 +35,23 @@ export interface ICustomAnimation {
   duration: number,
   currentFrame: number,
   step: number,
-  callback: Function,
-  animationMaster: number
+  animationMaster: number,
+  callback: Function
 }
 
 export interface ICutScene {
   entity : number,
-  queue : number,
+  startFrame : number,
+  endFrame: number,
   animation : unknown,
+  type: number,
+  started: boolean
 }
 
 export interface ICutSceneMaster {
   name: string,
-  size: 3,
-  scenes : Array<ICutScene>
+  scenes : Array<ICutScene>,
+  currentFrame: number
 }
 
 export interface IKeyFrame {

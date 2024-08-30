@@ -1,5 +1,5 @@
 import { AbstractMesh, ArcRotateCamera, Camera, EventState, Matrix, Mesh, Ray, Vector3, Animation } from "@babylonjs/core";
-import ISystem, { IAnimation, ICustomAnimation } from "../types";
+import ISystem, { IAnimation, ICustomAnimation, ICutSceneMaster } from "../types";
 import { ObjectHelpers } from "../enums";
 import { Config } from "../constants";
 
@@ -35,7 +35,9 @@ export const animateStandard = ({ world: w, components: c, entities: e }: ISyste
                 }
                 
                 entity.animations.push(anim);
-                w.scene.beginAnimation(entity, 0, animation.keyFrames[animation.keyFrames.length - 1].frame, false, 1, () => { animation.callback()});
+                w.scene.beginAnimation(entity, 0, animation.keyFrames[animation.keyFrames.length - 1].frame, false, 1, () => {
+                  animation.callback();
+                });
 
                 animation.created = true;
 
@@ -76,9 +78,9 @@ export const animateStandard = ({ world: w, components: c, entities: e }: ISyste
             if(animation.currentFrame < animation.duration)
             {
                 entity[animation.property] = ((animation.maxValue as number) - (animation.minValue as number)) * (animation.currentFrame / animation.duration);
+                animation.callback();
                 animation.currentFrame += animation.step;
             } else {
-                animation.callback();
                 indexToRemove = animIndex;
             }
             animIndex += 1;
@@ -89,6 +91,54 @@ export const animateStandard = ({ world: w, components: c, entities: e }: ISyste
                 indexToRemove = -1;
             }
         }
+      }
+    }
+  };
+
+  export const animationMaster = ({ world: w, components: c, entities: e }: ISystem) => async () => {
+    const archetypes = w.query.with(c.cutsceneMaster).execute();
+  
+    if (archetypes.length <= 0) {
+      return null;
+    }
+  
+    for( const archeType of archetypes) {
+      for (
+        let index = archeType.getEntities().length() - 1;
+        index >= 0;
+        index--
+      ) {
+        
+  
+        const cutsceneMaster: ICutSceneMaster = archeType.getColumn(c.cutsceneMaster)[index];
+        
+      
+        for(const cutscene of cutsceneMaster.scenes) {
+            if(!cutscene.started && cutscene.startFrame <= cutsceneMaster.currentFrame) {
+
+              let animationComponent;
+              if(cutscene.type == 0) {
+                if(w.entityManager.hasComponent(cutscene.entity, c.standardAnimation))
+                {
+                  animationComponent = w.entityManager.getComponent(cutscene.entity, c.standardAnimation)[w.entityManager.getArchTypeId(cutscene.entity)];
+                  animationComponent.animations.push_back(cutscene.animation);
+                } else {
+                  w.entityManager.addComponent(cutscene.entity, c.standardAnimation, [cutscene.animation])
+                }
+              } else {
+                if(w.entityManager.hasComponent(cutscene.entity, c.customAnimation))
+                {
+                  animationComponent = w.entityManager.getComponent(cutscene.entity, c.customAnimation)[w.entityManager.getArchTypeId(cutscene.entity)];
+                  animationComponent.animations.push_back(cutscene.animation);
+                } else {
+                  w.entityManager.addComponent(cutscene.entity, c.customAnimation, [cutscene.animation])
+                }        
+              }
+
+              cutscene.started = true;
+            }
+        }
+        cutsceneMaster.currentFrame += 1;
       }
     }
   };

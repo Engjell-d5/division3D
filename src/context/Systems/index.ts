@@ -4,7 +4,7 @@ import { ExecutionTime as ET } from "@/ecs/utilities/Types";
 import { AbstractMesh } from "@babylonjs/core";
 import {  rotateObject } from "./object";
 import { followMouse, mouseDown, mouseUp } from "./input";
-import { animateCustom, animateStandard } from "./animations";
+import { animateCustom, animateStandard, animationMaster } from "./animations";
 
 interface IRegisterStaticSystems extends ISystem {
   onSceneReady?: () => void;
@@ -19,9 +19,11 @@ const registerStaticSystems = async (props: IRegisterStaticSystems) => {
   w.systemManager.register(loadObject(wce), ET.BEFORE_RENDER);
   w.systemManager.register(rotateObject(wce), ET.BEFORE_RENDER);
 
-  w.systemManager.register(followMouse(wce), ET.BEFORE_RENDER);
+  w.systemManager.register(followMouse(wce), ET.WINDOW_MOUSE_MOVE);
   w.systemManager.register(animateStandard(wce), ET.BEFORE_RENDER);
   w.systemManager.register(animateCustom(wce), ET.BEFORE_RENDER);
+  w.systemManager.register(animationMaster(wce), ET.BEFORE_RENDER);
+
 
 
   w.systemManager.register(mouseUp(wce), ET.WINDOW_MOUSE_UP);

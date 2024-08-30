@@ -35,6 +35,7 @@ export const loadObject =
         // console.log(mesh);
 
         for (const mesh of result.meshes) {
+          w.scene.stopAnimation(mesh, "idle");
           mesh.isPickable = false;
 
 
@@ -57,7 +58,10 @@ export const loadObject =
         }
 
         if(w.entityManager.hasComponent(entId, c.character)) {
-          mesh.rotate(new Vector3(-1, 0, 0), 0.5);
+          mesh.rotationQuaternion = null;
+          mesh.rotation.y = Math.PI;
+          // mesh.rotate(new Vector3(-1, 0, 0), 0.5);
+          mesh.rotation.x = -0.5;
         }
 
 
