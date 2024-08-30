@@ -7,6 +7,8 @@ import { Config, Landmarks } from "../constants";
 import initAmbientLight from "./ambientLight";
 import initDirectionalLight from "./directionalLight";
 import initShadowGenerator from "./shadowGenerator";
+import { Color3, Scene } from "@babylonjs/core";
+import initFireflies from "./particleSystems";
 
 
 const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
@@ -57,9 +59,15 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.exposure = Config.exposure;
   props.world.scene.imageProcessingConfiguration.contrast = Config.contrast;
 
-  props.world.scene.imageProcessingConfiguration.vignetteEnabled = true;
+  props.world.scene.imageProcessingConfiguration.vignetteEnabled = false;
   props.world.scene.imageProcessingConfiguration.vignetteWeight = 2;
+
+  props.world.scene.fogEnabled =  false;
+  props.world.scene.fogDensity = 0.005;
+  props.world.scene.fogColor = Color3.Blue();
+  props.world.scene.fogMode = Scene.FOGMODE_EXP2;
   
+
   
   
   initCamera(props);
@@ -68,6 +76,7 @@ const initWorld = (props: ISystem) => {
   initShadowGenerator(props);
   initSkybox(props);
   initReferencePlane(props);
+  initFireflies(props);
   tempInitRoom(props);
 
 };

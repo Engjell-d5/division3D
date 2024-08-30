@@ -8,9 +8,8 @@ const initStaticEntities = (world: World) => {
     directionalLight: world.entityManager.create(),
     pointLight: world.entityManager.create(),
     shadowGenerator: world.entityManager.create(),
-    worldGrid: world.entityManager.create(),
-    meshGrid: (Config.debug) ? world.entityManager.create() : -1,
     referencePlane: world.entityManager.create(),
+    fireflies: world.entityManager.create()
   };
 
   return entities;
