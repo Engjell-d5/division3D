@@ -54,6 +54,8 @@ export const loadObject =
           if (w.entityManager.hasComponent(entId, c.flat) && mesh.material) {
             (mesh as Mesh).convertToFlatShadedMesh();
           }
+
+          // w.scene.stopAllAnimations();
         }
         
       

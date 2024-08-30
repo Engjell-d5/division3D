@@ -18,27 +18,33 @@ export const animate = ({ world: w, components: c, entities: e }: ISystem) => as
       ) {
         
         const entId = archeType.getEntityIdFromIndex(index);
+
   
         const animations: Array<IAnimation> = archeType.getColumn(c.animation)[index];
         
-        // for(const animation of animations) {
-        //     if(animation.enabled && !animation.created) {
-        //         const xSlide = new Animation("xSlide", "position", 10, Animation.ANIMATIONTYPE_FLOAT, Animation.ANIMATIONLOOPMODE_CONSTANT);
-        //         const keyFrames = []; 
+        for(const animation of animations) {
+            if(animation.enabled && !animation.created) {
+                const anim = new Animation(animation.name, animation.property, animation.fps, animation.animationType, Animation.ANIMATIONLOOPMODE_CYCLE);
+                anim.setKeys(animation.keyFrames);
 
-        //         keyFrames.push({
-        //             frame: 0,
-        //             value: 
-        //         });
-            
-        //         keyFrames.push({
-        //             frame: 10,
-        //             value: -2
-        //         });
-            
-        //     }
-        // }
-  
+
+
+                if(w.entityManager.hasComponent(entId, c.camera)) {
+
+                    const camera = w.entityManager.getComponent(entId, c.camera)[index];
+                    console.log(camera);
+                    camera.animations.push(anim);
+                    w.scene.beginAnimation(camera, 0, animation.keyFrames[animation.keyFrames.length - 1].frame, true);
+
+                    console.log("animating", camera.animations);
+
+
+                }
+
+                animation.created = true;
+
+            }
+        }
       }
     }
   };

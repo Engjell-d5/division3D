@@ -3,7 +3,7 @@ import ISystem from "../types";
 import { Config } from "../constants";
 
 const initFireflies = ({ world: w, components: c, entities: e }: ISystem) => {
-  const fireflies = new GPUParticleSystem("Fireflies", {capacity: 300}, w.scene);
+  const fireflies = new GPUParticleSystem("Fireflies", {capacity: 500}, w.scene);
   fireflies.maxEmitBox = new Vector3(10, 5, 3);
   fireflies.minEmitBox = new Vector3(-10, 0.5, -10);
   fireflies.minLifeTime = 15000;
@@ -18,7 +18,7 @@ const initFireflies = ({ world: w, components: c, entities: e }: ISystem) => {
   fireflies.emitRate = 10000;
   fireflies.emitter = new Vector3(0, 0, 0);
   fireflies.particleTexture = new Texture("images/firefly.png", w.scene);
-  fireflies.blendMode = Engine.ALPHA_MULTIPLY;
+  fireflies.blendMode = Engine.ALPHA_ADD;
   fireflies.start();
 
   w.entityManager.addComponent(

@@ -1,4 +1,4 @@
-import { ArcRotateCamera, DefaultRenderingPipeline, GlowLayer, Vector3 } from "@babylonjs/core";
+import { ArcRotateCamera, DefaultRenderingPipeline, GlowLayer, Vector3, Animation } from "@babylonjs/core";
 import ISystem, { IAnimation } from "../types";
 import { Config } from "../constants";
 
@@ -17,13 +17,24 @@ const initCamera = (props: ISystem) => {
 
   const animations : Array<IAnimation> = [
     {
-      duration: 10,
-      property: "position",
-      startValue: 1,
-      endValue: 10,
+      name: "initialCameraMovement",
+      duration: 120,
+      property: "position.z",
       enabled: true,
-      startTime: 0,
-      created: false
+      startFrame: 0,
+      created: false,
+      loop: false,
+      animationType: Animation.ANIMATIONTYPE_FLOAT,
+      keyFrames: [
+        {
+          frame: 0, 
+          value: 0,
+        },
+        {
+          frame: 120, 
+          value: 10,
+        }, 
+      ]
     }
   ];
 
@@ -32,12 +43,11 @@ const initCamera = (props: ISystem) => {
 
   dfp.samples = 4;
 
-  const glow = new GlowLayer("glow", w.scene);
-  glow.intensity = 0.5;
+  // const glow = new GlowLayer("glow", w.scene);
+  // glow.intensity = 0.5;
 
 
   w.entityManager.addComponent(e.camera, c.camera, arcRotateCamera);
-
 
 
   w.entityManager.addComponent(e.camera, c.animation, animations);

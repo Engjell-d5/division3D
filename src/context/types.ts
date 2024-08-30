@@ -15,13 +15,20 @@ export interface ILandmark {
 }
 
 export interface IAnimation {
-  duration: number,
+  name: string,
+  fps: number,
   property: string,
-  startValue: unknown,
-  endValue: unknown,
   enabled: boolean,
-  startTime: number,
-  created: boolean
+  startFrame: number,
+  created: boolean,
+  keyFrames: Array<IKeyFrame>,
+  animationType: number,
+  loop: boolean
+}
+
+export interface IKeyFrame {
+  frame: number,
+  value: unknown,
 }
 
 export interface IConfig {

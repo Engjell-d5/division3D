@@ -7,7 +7,7 @@ import { Config, Landmarks } from "../constants";
 import initAmbientLight from "./ambientLight";
 import initDirectionalLight from "./directionalLight";
 import initShadowGenerator from "./shadowGenerator";
-import { BloomEffect, Color3, Color4, Scene } from "@babylonjs/core";
+import { BloomEffect, Color3, Color4, DefaultRenderingPipeline, Scene } from "@babylonjs/core";
 import initFireflies from "./particleSystems";
 
 
@@ -16,7 +16,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(platform, c.loadable, {
     path: "assets/models/platform.glb"
   });
-  w.entityManager.addComponent(platform, c.rotatable);
+  // w.entityManager.addComponent(platform, c.rotatable);
   w.entityManager.addComponent(platform, c.shadows, { casts: true, receives: true});
 
 
@@ -42,7 +42,6 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
 
   const dome = w.entityManager.create();
   w.entityManager.addComponent(dome, c.loadable, {path: "assets/models/dome.glb"});
-  w.entityManager.addComponent(dome, c.shadows, { casts: false, receives: false});
 
 
   for( const landmarkDef of Landmarks) {
@@ -71,10 +70,8 @@ const initWorld = (props: ISystem) => {
   props.world.scene.fogDensity = 0.013;
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
-  
-  const bloom = new BloomEffect(props.world.scene, 10, 1000, 4);
-  
-  
+
+
   initCamera(props);
   initDirectionalLight(props);
   initAmbientLight(props);
