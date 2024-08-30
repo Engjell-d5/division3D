@@ -67,7 +67,7 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.vignetteWeight = 0.5;
 
   props.world.scene.fogEnabled =  true;
-  props.world.scene.fogDensity = 0.011;
+  props.world.scene.fogDensity = 0.0115;
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
   

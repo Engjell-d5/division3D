@@ -4,12 +4,12 @@ import { Config } from "../constants";
 
 const initFireflies = ({ world: w, components: c, entities: e }: ISystem) => {
   const fireflies = new GPUParticleSystem("Fireflies", {capacity: 500}, w.scene);
-  fireflies.maxEmitBox = new Vector3(10, 10, 10);
-  fireflies.minEmitBox = new Vector3(-10, -1, -10);
+  fireflies.maxEmitBox = new Vector3(10, 3, 10);
+  fireflies.minEmitBox = new Vector3(-10, 0, -10);
   fireflies.minLifeTime = 15000;
   fireflies.maxLifeTime = 20000;
   fireflies.minSize = 0.02;
-  fireflies.maxSize = 0.045;
+  fireflies.maxSize = 0.04;
   fireflies.minEmitPower = 0.05;
   fireflies.maxEmitPower = 0.1;
   fireflies.direction1 = new Vector3(-1, -1, -1);
