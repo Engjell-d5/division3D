@@ -24,7 +24,7 @@ export const Config : IConfig = {
     cameraPosition: new Vector3(0, 0.2, 0),
 
     cameraFOV: 1.0,
-    ambientLightColor: new Color3(255/255, 100/255, 0/255),
+    ambientLightColor: new Color3(255/255, 0/255, 0/255),
     ambientLightIntensity: 0.2,
 
     directionalLightIntensity: 1.2,

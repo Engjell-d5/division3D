@@ -7,7 +7,7 @@ import { Config, Landmarks } from "../constants";
 import initAmbientLight from "./ambientLight";
 import initDirectionalLight from "./directionalLight";
 import initShadowGenerator from "./shadowGenerator";
-import { Color3, Scene } from "@babylonjs/core";
+import { Color3, Color4, Scene } from "@babylonjs/core";
 import initFireflies from "./particleSystems";
 
 
@@ -65,9 +65,10 @@ const initWorld = (props: ISystem) => {
 
   props.world.scene.imageProcessingConfiguration.vignetteEnabled = true;
   props.world.scene.imageProcessingConfiguration.vignetteWeight = 0.5;
-
+  props.world.scene.imageProcessingConfiguration.vignetteColor = new Color4(0, 0.0, 1.0, 0);
+  props.world.scene.imageProcessingConfiguration.vignetteStretch = 5;
   props.world.scene.fogEnabled =  true;
-  props.world.scene.fogDensity = 0.0115;
+  props.world.scene.fogDensity = 0.012;
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
   

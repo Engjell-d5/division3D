@@ -1,4 +1,4 @@
-import { AbstractMesh, Color4, Mesh, SceneLoader, ShadowGenerator } from "@babylonjs/core";
+import { AbstractMesh, Color3, Color4, Mesh, SceneLoader, ShadowGenerator } from "@babylonjs/core";
 import { GridStatus, ObjectHelpers } from "../enums";
 import ISystem from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
@@ -56,6 +56,8 @@ export const loadObject =
           }
         }
         
+      
+
         if (w.entityManager.hasComponent(entId, c.position)) {
           const position = w.entityManager.getComponent(entId, c.position)[w.entityManager.getArchTypeId(entId)];
           mesh.position = position;
