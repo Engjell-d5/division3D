@@ -7,7 +7,7 @@ import { Config, Landmarks } from "../constants";
 import initAmbientLight from "./ambientLight";
 import initDirectionalLight from "./directionalLight";
 import initShadowGenerator from "./shadowGenerator";
-import { Color3, Color4, Scene } from "@babylonjs/core";
+import { BloomEffect, Color3, Color4, Scene } from "@babylonjs/core";
 import initFireflies from "./particleSystems";
 
 
@@ -72,7 +72,7 @@ const initWorld = (props: ISystem) => {
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
   
-
+  const bloom = new BloomEffect(props.world.scene, 10, 1000, 4);
   
   
   initCamera(props);

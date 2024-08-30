@@ -3,10 +3,10 @@ import { IConfig, ILandmark } from "./types";
 
 
 export const Landmarks : Array<ILandmark> = [
-  {
-    position: new Vector3(-2, 0, 2),
-    path: "assets/models/platform.glb"
-  }
+  // {
+  //   position: new Vector3(-2, 0, 2),
+  //   path: "assets/models/platform.glb"
+  // }
 ];
 
 export const Config : IConfig = {

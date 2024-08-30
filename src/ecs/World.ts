@@ -28,7 +28,7 @@ export default class World {
         this.query = new Query(this);
 
         this.canvas = canvas;
-        this.engine = new Engine(this.canvas, true);
+        this.engine = new Engine(this.canvas, false);
         this.scene = new Scene(this.engine);
         window.onresize = this.onResize;
     }

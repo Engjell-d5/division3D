@@ -24,7 +24,7 @@ const initStaticComponents = (world: World) => {
 
     highlight: world.schemaManager.register(Type.Custom),
     gpuParticleSystem: world.schemaManager.register(Type.Custom),
-    animation: world.schemaManager.register(Type.Custom)
+    animation: world.schemaManager.register(Type.Custom),
   };
 
   return components;

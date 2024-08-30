@@ -1,4 +1,4 @@
-import { ArcRotateCamera, Vector3 } from "@babylonjs/core";
+import { ArcRotateCamera, DefaultRenderingPipeline, GlowLayer, Vector3 } from "@babylonjs/core";
 import ISystem, { IAnimation } from "../types";
 import { Config } from "../constants";
 
@@ -26,6 +26,15 @@ const initCamera = (props: ISystem) => {
       created: false
     }
   ];
+
+
+  const dfp = new DefaultRenderingPipeline("default", true, w.scene, [arcRotateCamera], true);
+
+  dfp.samples = 4;
+
+  const glow = new GlowLayer("glow", w.scene);
+  glow.intensity = 0.5;
+
 
   w.entityManager.addComponent(e.camera, c.camera, arcRotateCamera);
 
