@@ -19,20 +19,48 @@ const initCamera = (props: ISystem) => {
     {
       name: "initialCameraMovement",
       fps: 30,
-      property: "position.z",
+      property: "lowerRadiusLimit",
       enabled: true,
       startFrame: 0,
       created: false,
       loop: false,
+      callback: () => {
+        w.entityManager.addComponent(e.glow, c.customAnimation, [{ step: 2, currentFrame: 0, property: "intensity", minValue: 0, maxValue: 0.5, duration: 120, callback : () => {
+          const animations : Array<IAnimation> = [
+            {
+              name: "initialCameraMovement",
+              fps: 30,
+              property: "lowerRadiusLimit",
+              enabled: true,
+              startFrame: 0,
+              created: false,
+              loop: false,
+              callback : () => {},
+              animationType: Animation.ANIMATIONTYPE_FLOAT,
+              keyFrames: [
+                {
+                  frame: 0, 
+                  value: 0.5,
+                },
+                {
+                  frame: 120, 
+                  value: Config.cameraUpperLimit,
+                }
+              ]
+              }
+            ];
+
+        } }]);
+      },
       animationType: Animation.ANIMATIONTYPE_FLOAT,
       keyFrames: [
         {
           frame: 0, 
-          value: 0,
+          value: 0.5,
         },
         {
           frame: 120, 
-          value: 1000,
+          value: Config.cameraUpperLimit,
         }, 
       ]
     }
@@ -47,11 +75,12 @@ const initCamera = (props: ISystem) => {
   w.entityManager.addComponent(e.camera, c.camera, arcRotateCamera);
 
 
-  w.entityManager.addComponent(e.camera, c.animation, animations);
+  w.entityManager.addComponent(e.camera, c.standardAnimation, animations);
 
   arcRotateCamera.attachControl(w.canvas);
 
-  arcRotateCamera.lowerRadiusLimit = Config.cameraLowerLimit;
+  arcRotateCamera.lowerRadiusLimit = 0;
+  arcRotateCamera.radius = 0;
   arcRotateCamera.upperRadiusLimit = Config.cameraUpperLimit;
   arcRotateCamera.lowerAlphaLimit = Config.cameraLowerAlpha;
   arcRotateCamera.upperAlphaLimit = Config.cameraUpperAlpha;

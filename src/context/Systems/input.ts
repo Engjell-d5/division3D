@@ -6,7 +6,7 @@ import { Config } from "../constants";
 
 
 export const followMouse = ({ world: w, components: c, entities: e }: ISystem) => async () => {
-  const archetypes = w.query.with(c.character).with(c.mesh).execute();
+  const archetypes = w.query.with(c.character).with(c.mesh).without(c.cutscene).execute();
 
   if (archetypes.length <= 0) {
     console.info("[followMouse]: No archetype found");

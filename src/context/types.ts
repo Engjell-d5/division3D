@@ -23,7 +23,18 @@ export interface IAnimation {
   created: boolean,
   keyFrames: Array<IKeyFrame>,
   animationType: number,
-  loop: boolean
+  loop: boolean,
+  callback: Function
+}
+
+export interface ICustomAnimation {
+  property : string,
+  minValue: unknown,
+  maxValue: unknown,
+  duration: number,
+  currentFrame: number,
+  step: number,
+  callback: Function
 }
 
 export interface IKeyFrame {

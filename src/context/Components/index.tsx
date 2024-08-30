@@ -19,12 +19,15 @@ const initStaticComponents = (world: World) => {
     }),
    
     clickable: world.schemaManager.register(Type.Tag),
+    cutscene: world.schemaManager.register(Type.Tag),
     character: world.schemaManager.register(Type.Custom),
     projectionCylinders: world.schemaManager.register(Type.Tag),
 
     highlight: world.schemaManager.register(Type.Custom),
     gpuParticleSystem: world.schemaManager.register(Type.Custom),
-    animation: world.schemaManager.register(Type.Custom),
+    standardAnimation: world.schemaManager.register(Type.Custom),
+    customAnimation : world.schemaManager.register(Type.Custom),
+    glow: world.schemaManager.register(Type.Custom)
   };
 
   return components;

@@ -9,7 +9,8 @@ const initStaticEntities = (world: World) => {
     pointLight: world.entityManager.create(),
     shadowGenerator: world.entityManager.create(),
     referencePlane: world.entityManager.create(),
-    fireflies: world.entityManager.create()
+    fireflies: world.entityManager.create(),
+    glow: world.entityManager.create()
   };
 
   return entities;

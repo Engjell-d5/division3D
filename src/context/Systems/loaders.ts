@@ -1,4 +1,4 @@
-import { AbstractMesh, Color3, Color4, Mesh, SceneLoader, ShadowGenerator } from "@babylonjs/core";
+import { AbstractMesh, Color3, Color4, Mesh, SceneLoader, ShadowGenerator, Vector3 } from "@babylonjs/core";
 import { GridStatus, ObjectHelpers } from "../enums";
 import ISystem from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
@@ -54,11 +54,12 @@ export const loadObject =
           if (w.entityManager.hasComponent(entId, c.flat) && mesh.material) {
             (mesh as Mesh).convertToFlatShadedMesh();
           }
-
-          // w.scene.stopAllAnimations();
         }
-        
-      
+
+        if(w.entityManager.hasComponent(entId, c.character)) {
+          mesh.rotate(new Vector3(-1, 0, 0), 0.5);
+        }
+
 
         if (w.entityManager.hasComponent(entId, c.position)) {
           const position = w.entityManager.getComponent(entId, c.position)[w.entityManager.getArchTypeId(entId)];

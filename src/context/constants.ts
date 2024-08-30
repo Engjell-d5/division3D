@@ -15,7 +15,7 @@ export const Config : IConfig = {
     blockMovement : false,
     
     cameraScrollSpeed : 0.01,
-    cameraLowerLimit : 3,
+    cameraLowerLimit : 0.5,
     cameraUpperLimit : 5,
     cameraLowerAlpha: Math.PI / 2,
     cameraUpperAlpha: Math.PI / 2,

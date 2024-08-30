@@ -9,6 +9,7 @@ import initDirectionalLight from "./directionalLight";
 import initShadowGenerator from "./shadowGenerator";
 import { BloomEffect, Color3, Color4, DefaultRenderingPipeline, GlowLayer, Scene, Vector3 } from "@babylonjs/core";
 import initFireflies from "./particleSystems";
+import initGlow from "./glow";
 
 
 const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
@@ -16,7 +17,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(platform, c.loadable, {
     path: "assets/models/platform.glb"
   });
-  // w.entityManager.addComponent(platform, c.rotatable);
+  w.entityManager.addComponent(platform, c.rotatable);
   w.entityManager.addComponent(platform, c.shadows, { casts: true, receives: true});
 
 
@@ -32,6 +33,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   const elephant = w.entityManager.create();
   w.entityManager.addComponent(elephant, c.loadable, {path: "assets/models/divi.glb"});
   w.entityManager.addComponent(elephant, c.character);
+  w.entityManager.addComponent(elephant, c.cutscene);
   w.entityManager.addComponent(elephant, c.shadows, { casts: true, receives: true});
 
 
@@ -44,8 +46,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   const tree = w.entityManager.create();
   w.entityManager.addComponent(tree, c.loadable, {path: "assets/models/tree.glb"});
   w.entityManager.addComponent(tree, c.shadows, { casts: true, receives: true});
-  w.entityManager.addComponent(tree, c.position, new Vector3(5, 0, -2));
-
+  w.entityManager.addComponent(tree, c.position, new Vector3(5, 0, -1));
 
 
   const dome = w.entityManager.create();
@@ -80,8 +81,7 @@ const initWorld = (props: ISystem) => {
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
 
   
-  const glow = new GlowLayer("glow", props.world.scene);
-  glow.intensity = 0.5;
+
 
 
   initCamera(props);
@@ -92,6 +92,7 @@ const initWorld = (props: ISystem) => {
   initReferencePlane(props);
   initFireflies(props);
   tempInitRoom(props);
+  initGlow(props);
 
 };
 
