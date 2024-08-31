@@ -10,8 +10,8 @@ const initFireflies = ({ world: w, components: c, entities: e }: ISystem) => {
   fireflies.maxLifeTime = 20000;
   fireflies.minSize = 0.02;
   fireflies.maxSize = 0.04;
-  fireflies.minEmitPower = 0.05;
-  fireflies.maxEmitPower = 0.1;
+  fireflies.minEmitPower = 0.1;
+  fireflies.maxEmitPower = 0.2;
   fireflies.direction1 = new Vector3(-1, -1, -1);
   fireflies.direction2 = new Vector3(1, 1, 1);
   fireflies.applyFog = true;

@@ -65,7 +65,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
     w.entityManager.addComponent(landmark, c.position, landmarkDef.position);
     w.entityManager.addComponent(landmark, c.clickable);
     w.entityManager.addComponent(landmark, c.prop);
-    w.entityManager.addComponent(landmark, c.content, {type: "video", path: "assets/videos/illyria.webm"});
+    w.entityManager.addComponent(landmark, c.content, {type: landmarkDef.contentType, path: landmarkDef.contentPath});
     w.entityManager.addComponent(landmark, c.shadows, { casts: true, receives: true});
 
   }

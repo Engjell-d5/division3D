@@ -11,7 +11,9 @@ export default interface ISystem {
 
 export interface ILandmark {
   position: Vector3,
-  path: string
+  path: string,
+  contentType: number,
+  contentPath: string
 }
 
 export interface IAnimation {
@@ -81,5 +83,8 @@ export interface IConfig {
   toneMappingEnabled: boolean,
   toneMappingType: number,
   exposure: number,
-  contrast: number
+  contrast: number,
+
+  projectionPlaneWidth: number,
+  projectionPlaneHeight: number,
 }

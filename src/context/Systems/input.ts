@@ -1,6 +1,6 @@
-import { Matrix, Color3, AbstractMesh, Mesh, Vector3, StandardMaterial, VideoTexture, HighlightLayer } from "@babylonjs/core";
+import { Matrix, Color3, AbstractMesh, Mesh, Vector3, Animation, StandardMaterial, VideoTexture, HighlightLayer } from "@babylonjs/core";
 import { GridStatus, MountOrientation, MovementStatus, ObjectHelpers } from "../enums";
-import ISystem from "../types";
+import ISystem, { IAnimation } from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
 import { Config } from "../constants";
 
@@ -71,6 +71,13 @@ export const mouseUp = ({ world: w, components: c, entities: e }: ISystem) => as
 
   projection.setEnabled(false);
   overlay.setEnabled(false);
+
+  projection.scaling.x = 0;
+  projection.scaling.y = 0;
+
+  overlay.scaling.x = 0;
+  overlay.scaling.y = 0;
+
   (projection.material as StandardMaterial).diffuseTexture?.dispose();
   w.entityManager.removeComponent(e.character, c.onCutscene);
 
@@ -130,22 +137,69 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
       const projection = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).projection[w.entityManager.getArchTypeId(e.projectionPlane)];
       const overlay = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).overlay[w.entityManager.getArchTypeId(e.projectionPlane)];
 
-
-      // w.entityManager.addComponent(e.projectionPlane, c.enabled);
-      // w.entityManager.addComponent(e.projectionPlane, c.content, content);
-
-
       projection.position = target.pickedPoint;
       projection.position.z += 0.5;
 
       overlay.position = projection.position;
       overlay.position.z += 0.01;
 
-      (projection.material as StandardMaterial).diffuseTexture = new VideoTexture("video", "videos/illyria.webm", w.scene, true);
+      if(type === 0) {
+        (projection.material as StandardMaterial).diffuseTexture = new VideoTexture("video", path, w.scene, true);
+      }
 
       overlay.setEnabled(true);
       projection.setEnabled(true);
 
+      const animations = w.entityManager.getComponent(e.projectionPlane, c.standardAnimation)[0];
+      animations.push(
+          {
+          name: "scalex",
+          fps: 30,
+          property: "scaling.x",
+          enabled: true,
+          startFrame: 0,
+          created: false,
+          loop: false,
+          callback : () => {
+          },
+          animationType: Animation.ANIMATIONTYPE_FLOAT,
+          keyFrames: [
+            {
+              frame: 0, 
+              value: 0,
+            },
+            {
+              frame: 5, 
+              value: -Config.projectionPlaneWidth,
+            }, 
+          ]
+        }
+      )
+
+      animations.push(
+        {
+        name: "scaley",
+        fps: 30,
+        property: "scaling.y",
+        enabled: true,
+        startFrame: 0,
+        created: false,
+        loop: false,
+        callback : () => {
+        },
+        animationType: Animation.ANIMATIONTYPE_FLOAT,
+        keyFrames: [
+          {
+            frame: 0, 
+            value: 0,
+          },
+          {
+            frame: 5, 
+            value: Config.projectionPlaneHeight,
+          }, 
+        ]
+      }
+    )
     }
   }
 

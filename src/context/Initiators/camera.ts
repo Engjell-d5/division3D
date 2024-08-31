@@ -26,7 +26,7 @@ const initCamera = (props: ISystem) => {
   arcRotateCamera.attachControl(w.canvas);
 
   arcRotateCamera.lowerRadiusLimit = 0;
-  arcRotateCamera.radius = 0;
+  arcRotateCamera.radius = 1;
   arcRotateCamera.upperRadiusLimit = Config.cameraUpperLimit;
   arcRotateCamera.lowerAlphaLimit = Config.cameraLowerAlpha;
   arcRotateCamera.upperAlphaLimit = Config.cameraUpperAlpha;

@@ -27,17 +27,42 @@ export const animateStandard = ({ world: w, components: c, entities: e }: ISyste
                 const anim = new Animation(animation.name, animation.property, animation.fps, animation.animationType, Animation.ANIMATIONLOOPMODE_CYCLE);
                 anim.setKeys(animation.keyFrames);
                 
-                let entity;
                 if(w.entityManager.hasComponent(entId, c.camera)) {
+                    let entity;
+
                     entity = w.entityManager.getComponent(entId, c.camera)[index];
+
+                    entity.animations.push(anim);
+                    w.scene.beginAnimation(entity, 0, animation.keyFrames[animation.keyFrames.length - 1].frame, false, 1, () => {
+                      animation.callback();
+                    });
                 } else if(w.entityManager.hasComponent(entId, c.mesh)) {
+                    let entity;
+
                     entity = w.entityManager.getComponent(entId, c.mesh)[index];
+
+                    entity.animations.push(anim);
+                    w.scene.beginAnimation(entity, 0, animation.keyFrames[animation.keyFrames.length - 1].frame, false, 1, () => {
+                      animation.callback();
+                    });
+                } else if(w.entityManager.hasComponent(entId, c.projectionPlane)) {
+                    let projection, overlay;
+                    projection = w.entityManager.getComponent(entId, c.projectionPlane).projection[index];
+                    overlay = w.entityManager.getComponent(entId, c.projectionPlane).overlay[index];
+
+                    projection.animations.push(anim);
+                    overlay.animations.push(anim);
+
+                    w.scene.beginAnimation(projection, 0, animation.keyFrames[animation.keyFrames.length - 1].frame, false, 1, () => {
+                      animation.callback();
+                    });
+
+                    w.scene.beginAnimation(overlay, 0, animation.keyFrames[animation.keyFrames.length - 1].frame, false, 1, () => {
+                      animation.callback();
+                    });
                 }
                 
-                entity.animations.push(anim);
-                w.scene.beginAnimation(entity, 0, animation.keyFrames[animation.keyFrames.length - 1].frame, false, 1, () => {
-                  animation.callback();
-                });
+               
 
                 animation.created = true;
 
