@@ -5,13 +5,13 @@ import { IConfig, ILandmark } from "./types";
 
 export const Landmarks : Array<ILandmark> = [
   {
-    position: new Vector3(-1, 0, 2),
+    position: new Vector3(-1.5, 0, 2),
     path: "assets/models/illyria.glb",
     contentType: 0,
     contentPath: "videos/illyria.webm"
   },
   {
-    position: new Vector3(1, 0, 2),
+    position: new Vector3(1.5, 0, 2),
     path: "assets/models/plane.glb",
     contentType: 0,
     contentPath: "videos/tmt.mp4"

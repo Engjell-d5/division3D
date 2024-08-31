@@ -44,6 +44,7 @@ export const followMouse = ({ world: w, components: c, entities: e }: ISystem) =
         } else {
           (highlight as HighlightLayer).addMesh(target.pickedMesh as Mesh, new Color3(0.5, 0.5, 1));
         }
+        // mesh.lookAt(new Vector3(-target.pickedMesh.position.x, -target.pickedMesh.position.y, target.pi.z));
 
         return;
       }
