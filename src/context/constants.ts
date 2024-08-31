@@ -1,12 +1,20 @@
 import { Color3, Color4, ImageProcessingConfiguration, Vector3 } from "@babylonjs/core";
 import { IConfig, ILandmark } from "./types";
 
+// const illyriaProp = w.entityManager.create();
+//   w.entityManager.addComponent(illyriaProp, c.loadable, {path: "assets/models/illyria.glb"});
+//   w.entityManager.addComponent(illyriaProp, c.shadows, { casts: true, receives: true});
+//   w.entityManager.addComponent(illyriaProp, c.flat);
+//   w.entityManager.addComponent(illyriaProp, c.prop);
+//   w.entityManager.addComponent(illyriaProp, c.clickable);
+//   w.entityManager.addComponent(illyriaProp, c.position, new Vector3(-2, 0, 2));
+//   w.entityManager.addComponent(illyriaProp, c.video, {path: "videos/illyria.webm"});
 
 export const Landmarks : Array<ILandmark> = [
-  // {
-  //   position: new Vector3(-2, 0, 2),
-  //   path: "assets/models/platform.glb"
-  // }
+  {
+    position: new Vector3(-2, 0, 2),
+    path: "assets/models/illyria.glb"
+  }
 ];
 
 export const Config : IConfig = {

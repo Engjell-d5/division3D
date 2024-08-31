@@ -36,8 +36,13 @@ export const loadObject =
 
         for (const mesh of result.meshes) {
           w.scene.stopAnimation(mesh, "idle");
-          mesh.isPickable = false;
 
+          if(!w.entityManager.hasComponent(entId, c.clickable))
+          {
+            mesh.isPickable = false;
+          }
+
+          mesh.name = entId;
 
           if (w.entityManager.hasComponent(e.shadowGenerator, c.shadowGenerator) && w.entityManager.hasComponent(entId, c.shadows)) {
             

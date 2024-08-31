@@ -1,4 +1,4 @@
-import { Matrix, Color3, AbstractMesh, Mesh, Vector3 } from "@babylonjs/core";
+import { Matrix, Color3, AbstractMesh, Mesh, Vector3, StandardMaterial, VideoTexture, HighlightLayer } from "@babylonjs/core";
 import { GridStatus, MountOrientation, MovementStatus, ObjectHelpers } from "../enums";
 import ISystem from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
@@ -9,7 +9,6 @@ export const followMouse = ({ world: w, components: c, entities: e }: ISystem) =
   const archetypes = w.query.with(c.character).with(c.mesh).without(c.onCutscene).execute();
 
   if (archetypes.length <= 0) {
-    console.info("[followMouse]: No archetype found");
     return null;
   }
 
@@ -29,10 +28,24 @@ export const followMouse = ({ world: w, components: c, entities: e }: ISystem) =
       }
 
       const target = w.scene.pick(w.scene.pointerX, w.scene.pointerY);
+      const highlight = w.entityManager.getComponent(e.highlight, c.highlight)[0];
 
-      if(target.pickedPoint)
-      {
-        mesh.lookAt(new Vector3(-target.pickedPoint.x, -target.pickedPoint.y, target.pickedPoint.z))
+
+      if(target.pickedMesh && target.pickedPoint && target.pickedMesh.name === "referencePlane"){
+        mesh.lookAt(new Vector3(-target.pickedPoint.x, -target.pickedPoint.y, target.pickedPoint.z));
+        (highlight as HighlightLayer).removeAllMeshes();
+
+      } else if(target.pickedMesh && target.pickedPoint) {
+        
+        if(target.pickedMesh.parent) {
+          for( const child of target.pickedMesh.parent.getChildMeshes()) {
+            (highlight as HighlightLayer).addMesh(child as Mesh, new Color3(0.5, 0.5, 1));
+          }
+        } else {
+          (highlight as HighlightLayer).addMesh(target.pickedMesh as Mesh, new Color3(0.5, 0.5, 1));
+        }
+
+        return;
       }
     }
   }
@@ -52,10 +65,24 @@ export const mouseUp = ({ world: w, components: c, entities: e }: ISystem) => as
   const projMesh : Mesh = projectionArchetype.getColumn(c.mesh)[0];
 
   projMesh.setEnabled(false);
+
+  const projection = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).projection[w.entityManager.getArchTypeId(e.projectionPlane)];
+  const overlay = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).overlay[w.entityManager.getArchTypeId(e.projectionPlane)];
+
+  projection.setEnabled(false);
+  overlay.setEnabled(false);
+  (projection.material as StandardMaterial).diffuseTexture?.dispose();
+  w.entityManager.removeComponent(e.character, c.onCutscene);
+
   
 };
 
 export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => async () => {
+  
+  if(w.entityManager.hasComponent(e.projectionPlane, c.enabled)) {
+    return;
+  }
+  
   const [charArchetype] = w.query.with(c.character).with(c.mesh).execute();
   const [projectionArchetype] = w.query.with(c.projectionCylinders).with(c.mesh).execute();
 
@@ -72,10 +99,55 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
   
   const projMesh : Mesh = projectionArchetype.getColumn(c.mesh)[0];
 
-  if(!projMesh.isEnabled())
-  {
-    projMesh.setEnabled(true);
-    projMesh.attachToBone(charMesh.getChildMeshes()[0].skeleton!.bones[0], charMesh);  
+
+  const target = w.scene.pick(w.scene.pointerX, w.scene.pointerY);
+
+  if(target.pickedMesh) {
+    const entId = Number(target.pickedMesh.name);
+
+    if(isNaN(entId)) {
+      return;
+    }
+
+
+    if(!projMesh.isEnabled())
+    {
+      projMesh.setEnabled(true);
+      projMesh.attachToBone(charMesh.getChildMeshes()[0].skeleton!.bones[0], charMesh);  
+    }
+    const highlight = w.entityManager.getComponent(e.highlight, c.highlight)[0];
+    (highlight as HighlightLayer).removeAllMeshes();
+
+    w.entityManager.addComponent(e.character, c.onCutscene);
+
+    console.log("ent id is", entId);
+
+    if(w.entityManager.hasComponent(entId, c.prop) && w.entityManager.hasComponent(entId, c.content)) {
+     
+      const path = w.entityManager.getComponent(entId, c.content).path[w.entityManager.getArchTypeId(entId)];
+      const type = w.entityManager.getComponent(entId, c.content).type[w.entityManager.getArchTypeId(entId)];
+
+      const projection = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).projection[w.entityManager.getArchTypeId(e.projectionPlane)];
+      const overlay = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).overlay[w.entityManager.getArchTypeId(e.projectionPlane)];
+
+
+      // w.entityManager.addComponent(e.projectionPlane, c.enabled);
+      // w.entityManager.addComponent(e.projectionPlane, c.content, content);
+
+
+      projection.position = target.pickedPoint;
+      projection.position.z += 0.5;
+
+      overlay.position = projection.position;
+      overlay.position.z += 0.01;
+
+      (projection.material as StandardMaterial).diffuseTexture = new VideoTexture("video", "videos/illyria.webm", w.scene, true);
+
+      overlay.setEnabled(true);
+      projection.setEnabled(true);
+
+    }
   }
+
  
 };

@@ -11,6 +11,8 @@ import { BloomEffect, Color3, Color4, DefaultRenderingPipeline, GlowLayer, Scene
 import initFireflies from "./particleSystems";
 import initGlow from "./glow";
 import initAnimationMaster from "./animationMaster";
+import initProjectionPlane from "./projectionPlane";
+import initHighlightLayer from "./initHighlightLayer";
 
 
 const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
@@ -49,6 +51,8 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(tree, c.shadows, { casts: true, receives: true});
   w.entityManager.addComponent(tree, c.position, new Vector3(5, 0, -1));
 
+  
+
 
   const dome = w.entityManager.create();
   w.entityManager.addComponent(dome, c.loadable, {path: "assets/models/dome.glb"});
@@ -60,6 +64,8 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
     // w.entityManager.addComponent(landmark, c.flat);
     w.entityManager.addComponent(landmark, c.position, landmarkDef.position);
     w.entityManager.addComponent(landmark, c.clickable);
+    w.entityManager.addComponent(landmark, c.prop);
+    w.entityManager.addComponent(landmark, c.content, {type: "video", path: "assets/videos/illyria.webm"});
     w.entityManager.addComponent(landmark, c.shadows, { casts: true, receives: true});
 
   }
@@ -81,9 +87,6 @@ const initWorld = (props: ISystem) => {
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
 
-  
-
-
 
   initCamera(props);
   initDirectionalLight(props);
@@ -95,7 +98,8 @@ const initWorld = (props: ISystem) => {
   tempInitRoom(props);
   initGlow(props);
   initAnimationMaster(props);
-
+  initProjectionPlane(props);
+  initHighlightLayer(props);
 };
 
 export default initWorld;

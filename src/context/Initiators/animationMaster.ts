@@ -42,15 +42,15 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
       {
         entity: e.glow,
         startFrame: 30,
-        endFrame: 120,
+        endFrame: 90,
         type: 1,
         started: false,
-        animation: { step: 1, currentFrame: 0, property: "intensity", minValue: 0, maxValue: 0.5, duration: 90, callback : () => {}, animationMaster: e.animationMaster }
+        animation: { step: 1, currentFrame: 0, property: "intensity", minValue: 0, maxValue: 0.5, duration: 60, callback : () => {}, animationMaster: e.animationMaster }
       },
       {
         entity : e.character,
-        startFrame: 120,
-        endFrame: 150,
+        startFrame: 90,
+        endFrame: 120,
         type: 0,
         started: false,
         animation :  {

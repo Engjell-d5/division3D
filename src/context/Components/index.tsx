@@ -11,6 +11,8 @@ const initStaticComponents = (world: World) => {
     shadowsLight: world.schemaManager.register(Type.Tag),
     flat : world.schemaManager.register(Type.Tag),
     rotatable: world.schemaManager.register(Type.Tag),
+    active: world.schemaManager.register(Type.Tag),
+    enabled: world.schemaManager.register(Type.Tag),
     shadows: world.schemaManager.register({ casts: Type.Boolean, receives: Type.Boolean}),
 
     loadable: world.schemaManager.register({
@@ -29,7 +31,10 @@ const initStaticComponents = (world: World) => {
     customAnimation : world.schemaManager.register(Type.Custom),
     glow: world.schemaManager.register(Type.Custom),
     cutsceneMaster: world.schemaManager.register(Type.Custom),
-    
+    prop: world.schemaManager.register(Type.Tag),
+    content: world.schemaManager.register({path: Type.Custom, type: Type.Int16}),
+    projectionPlane: world.schemaManager.register({overlay: Type.Custom, projection: Type.Custom}),
+
   };
 
   return components;

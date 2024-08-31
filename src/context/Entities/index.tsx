@@ -11,9 +11,11 @@ const initStaticEntities = (world: World) => {
     referencePlane: world.entityManager.create(),
     fireflies: world.entityManager.create(),
     glow: world.entityManager.create(),
+    highlight: world.entityManager.create(),
     animationMaster: world.entityManager.create(),
     character: world.entityManager.create(),
     platform: world.entityManager.create(),
+    projectionPlane: world.entityManager.create()
   };
 
   return entities;
