@@ -32,7 +32,7 @@ const initStaticComponents = (world: World) => {
     glow: world.schemaManager.register(Type.Custom),
     cutsceneMaster: world.schemaManager.register(Type.Custom),
     prop: world.schemaManager.register(Type.Tag),
-    content: world.schemaManager.register({path: Type.Custom, type: Type.Int16}),
+    content: world.schemaManager.register({path: Type.Custom, type: Type.Int16, width: Type.Int16, height: Type.Int16}),
     projectionPlane: world.schemaManager.register({overlay: Type.Custom, projection: Type.Custom}),
 
   };

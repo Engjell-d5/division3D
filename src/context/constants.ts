@@ -8,13 +8,17 @@ export const Landmarks : Array<ILandmark> = [
     position: new Vector3(-1.5, 0, 2),
     path: "assets/models/illyria.glb",
     contentType: 0,
-    contentPath: "videos/illyria.webm"
+    contentPath: "videos/illyria.webm",
+    contentWidth: -2,
+    contentHeight: 1
   },
   {
-    position: new Vector3(1.5, 0, 2),
+    position: new Vector3(-4, 0, -2),
     path: "assets/models/plane.glb",
     contentType: 0,
-    contentPath: "videos/tmt.mp4"
+    contentPath: "videos/tmt.mp4",
+    contentWidth: -2,
+    contentHeight: 1
   }
 ];
 

@@ -134,6 +134,8 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
      
       const path = w.entityManager.getComponent(entId, c.content).path[w.entityManager.getArchTypeId(entId)];
       const type = w.entityManager.getComponent(entId, c.content).type[w.entityManager.getArchTypeId(entId)];
+      const width = w.entityManager.getComponent(entId, c.content).width[w.entityManager.getArchTypeId(entId)];
+      const height = w.entityManager.getComponent(entId, c.content).height[w.entityManager.getArchTypeId(entId)];
 
       const projection = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).projection[w.entityManager.getArchTypeId(e.projectionPlane)];
       const overlay = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).overlay[w.entityManager.getArchTypeId(e.projectionPlane)];
@@ -171,7 +173,7 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
             },
             {
               frame: 5, 
-              value: -Config.projectionPlaneWidth,
+              value: width,
             }, 
           ]
         }
@@ -196,7 +198,7 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
           },
           {
             frame: 5, 
-            value: Config.projectionPlaneHeight,
+            value: height,
           }, 
         ]
       }

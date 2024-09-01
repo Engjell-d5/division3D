@@ -13,7 +13,9 @@ export interface ILandmark {
   position: Vector3,
   path: string,
   contentType: number,
-  contentPath: string
+  contentPath: string,
+  contentWidth: number,
+  contentHeight: number
 }
 
 export interface IAnimation {

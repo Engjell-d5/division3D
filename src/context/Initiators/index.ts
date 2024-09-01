@@ -51,8 +51,6 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(tree, c.shadows, { casts: true, receives: true});
   w.entityManager.addComponent(tree, c.position, new Vector3(5, 0, -1));
 
-  
-
 
   const dome = w.entityManager.create();
   w.entityManager.addComponent(dome, c.loadable, {path: "assets/models/dome.glb"});
@@ -65,7 +63,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
     w.entityManager.addComponent(landmark, c.position, landmarkDef.position);
     w.entityManager.addComponent(landmark, c.clickable);
     w.entityManager.addComponent(landmark, c.prop);
-    w.entityManager.addComponent(landmark, c.content, {type: landmarkDef.contentType, path: landmarkDef.contentPath});
+    w.entityManager.addComponent(landmark, c.content, {type: landmarkDef.contentType, path: landmarkDef.contentPath, width: landmarkDef.contentWidth, height: landmarkDef.contentHeight});
     w.entityManager.addComponent(landmark, c.shadows, { casts: true, receives: true});
 
   }
