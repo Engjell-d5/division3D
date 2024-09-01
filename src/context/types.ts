@@ -55,7 +55,8 @@ export interface ICutScene {
 export interface ICutSceneMaster {
   name: string,
   scenes : Array<ICutScene>,
-  currentFrame: number
+  currentFrame: number,
+  maxFrame: number
 }
 
 export interface IKeyFrame {

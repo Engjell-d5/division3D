@@ -8,6 +8,7 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
   const cutscene: ICutSceneMaster = {
     name : "startScene",
     currentFrame: 0,
+    maxFrame: 180,
     scenes : [
       {
         entity : e.camera,
@@ -42,8 +43,8 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
       },
       {
         entity: e.glow,
-        startFrame: 60,
-        endFrame: 120,
+        startFrame: 90,
+        endFrame: 150,
         type: 1,
         started: false,
         animation: { step: 1, currentFrame: 0, property: "intensity", minValue: 0, maxValue: 0.5, duration: 60, callback : () => {
@@ -52,8 +53,8 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
       },
       {
         entity : e.character,
-        startFrame: 120,
-        endFrame: 150,
+        startFrame: 150,
+        endFrame: 180,
         type: 0,
         started: false,
         animation :  {
@@ -84,8 +85,10 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
     ]
   }
   
+  const animationMaster = w.entityManager.create();
+
   w.entityManager.addComponent(
-    e.animationMaster,
+    animationMaster,
     c.cutsceneMaster,
     cutscene
   );

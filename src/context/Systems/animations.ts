@@ -164,6 +164,11 @@ export const animateStandard = ({ world: w, components: c, entities: e }: ISyste
             }
         }
         cutsceneMaster.currentFrame += 1;
+
+        if(cutsceneMaster.currentFrame > cutsceneMaster.maxFrame) {
+          w.entityManager.destroy(archeType.getEntityIdFromIndex(index));
+          console.log("destroying", archeType.getEntityIdFromIndex(index));
+        }
       }
     }
   };
