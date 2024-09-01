@@ -22,7 +22,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
     const landmark = w.entityManager.create();
     w.entityManager.addComponent(landmark, c.loadable, {path: landmarkDef.path});
     // w.entityManager.addComponent(landmark, c.flat);
-    w.entityManager.addComponent(landmark, c.position, landmarkDef.position);
+    w.entityManager.addComponent(landmark, c.transform, { position: landmarkDef.position, rotation : Vector3.Zero(), scaling: Vector3.One()});
     w.entityManager.addComponent(landmark, c.clickable);
     w.entityManager.addComponent(landmark, c.prop);
     w.entityManager.addComponent(landmark, c.content, {type: landmarkDef.contentType, path: landmarkDef.contentPath, width: landmarkDef.contentWidth, height: landmarkDef.contentHeight});
@@ -33,9 +33,13 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(e.platform, c.loadable, {
     path: "assets/models/platform.glb"
   });
-  // w.entityManager.addComponent(e.platform, c.rotatable);
   w.entityManager.addComponent(e.platform, c.shadows, { casts: true, receives: true});
 
+  e.platformGlow = w.entityManager.create();
+  w.entityManager.addComponent(e.platformGlow, c.loadable, {
+    path: "assets/models/platformGlow.glb"
+  });
+  w.entityManager.addComponent(e.platformGlow, c.transform, { position: null, rotation: null, scaling: new Vector3(1, 0, 1)});
 
   const projectionCylinder = w.entityManager.create();
   w.entityManager.addComponent(projectionCylinder, c.loadable, {
@@ -51,6 +55,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(e.character, c.character);
   w.entityManager.addComponent(e.character, c.onCutscene);
   w.entityManager.addComponent(e.character, c.shadows, { casts: true, receives: true});
+  w.entityManager.addComponent(e.character, c.transform, { position: null, rotation: new Vector3(-0.5, Math.PI, 0), scaling: null})
 
 
   const terrain = w.entityManager.create();
@@ -62,7 +67,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   const tree = w.entityManager.create();
   w.entityManager.addComponent(tree, c.loadable, {path: "assets/models/tree.glb"});
   w.entityManager.addComponent(tree, c.shadows, { casts: true, receives: true});
-  w.entityManager.addComponent(tree, c.position, new Vector3(5, 0, -1));
+  w.entityManager.addComponent(tree, c.transform, { position: new Vector3(5, 0, -1), rotation: Vector3.Zero(), scaling: Vector3.One()});
 
 
   const dome = w.entityManager.create();

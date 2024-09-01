@@ -146,7 +146,7 @@ export const animateStandard = ({ world: w, components: c, entities: e }: ISyste
                 if(w.entityManager.hasComponent(cutscene.entity, c.standardAnimation))
                 {
                   animationComponent = w.entityManager.getComponent(cutscene.entity, c.standardAnimation)[w.entityManager.getArchTypeId(cutscene.entity)];
-                  animationComponent.animations.push_back(cutscene.animation);
+                  animationComponent.push(cutscene.animation);
                 } else {
                   w.entityManager.addComponent(cutscene.entity, c.standardAnimation, [cutscene.animation])
                 }
@@ -154,7 +154,7 @@ export const animateStandard = ({ world: w, components: c, entities: e }: ISyste
                 if(w.entityManager.hasComponent(cutscene.entity, c.customAnimation))
                 {
                   animationComponent = w.entityManager.getComponent(cutscene.entity, c.customAnimation)[w.entityManager.getArchTypeId(cutscene.entity)];
-                  animationComponent.animations.push_back(cutscene.animation);
+                  animationComponent.push(cutscene.animation);
                 } else {
                   w.entityManager.addComponent(cutscene.entity, c.customAnimation, [cutscene.animation])
                 }        

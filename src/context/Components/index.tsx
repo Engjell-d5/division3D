@@ -4,7 +4,7 @@ import { Type } from "@/ecs/utilities/Types";
 const initStaticComponents = (world: World) => {
   const components = {
     camera: world.schemaManager.register(Type.Custom),
-    position: world.schemaManager.register(Type.Custom),
+    transform: world.schemaManager.register({ position: Type.Custom, rotation: Type.Custom, scaling: Type.Custom}),
     light: world.schemaManager.register(Type.Custom),
     shadowGenerator: world.schemaManager.register(Type.Custom),
     mesh: world.schemaManager.register(Type.Custom),

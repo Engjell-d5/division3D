@@ -14,6 +14,7 @@ const initStaticEntities = (world: World) => {
     highlight: world.entityManager.create(),
     character: world.entityManager.create(),
     platform: world.entityManager.create(),
+    platformGlow: world.entityManager.create(),
     projectionPlane: world.entityManager.create()
   };
 

@@ -5,6 +5,8 @@ import { startCharacterAnimation } from "../Systems/projection";
 
 const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) => {
   
+  const animationMaster = w.entityManager.create();
+
   const cutscene: ICutSceneMaster = {
     name : "startScene",
     currentFrame: 0,
@@ -42,6 +44,35 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
         }
       },
       {
+        entity : e.platformGlow,
+        startFrame: 120,
+        endFrame: 150,
+        type: 0,
+        started: false,
+        animation :  {
+          name: "platformGlowScale",
+          fps: 30,
+          property: "scaling.y",
+          enabled: true,
+          startFrame: 0,
+          created: false,
+          callback: () => {
+          },
+          loop: false,
+          animationType: Animation.ANIMATIONTYPE_FLOAT,
+          keyFrames: [
+            {
+              frame: 0, 
+              value: 0,
+            },
+            {
+              frame: 30, 
+              value: 1,
+            }, 
+          ]
+        }
+      },
+      {
         entity: e.glow,
         startFrame: 90,
         endFrame: 150,
@@ -49,7 +80,7 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
         started: false,
         animation: { step: 1, currentFrame: 0, property: "intensity", minValue: 0, maxValue: 0.5, duration: 60, callback : () => {
           startCharacterAnimation({ world: w, components: c, entities: e });
-        }, animationMaster: e.animationMaster }
+        }, animationMaster: animationMaster }
       },
       {
         entity : e.character,
@@ -85,8 +116,6 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
     ]
   }
   
-  const animationMaster = w.entityManager.create();
-
   w.entityManager.addComponent(
     animationMaster,
     c.cutsceneMaster,

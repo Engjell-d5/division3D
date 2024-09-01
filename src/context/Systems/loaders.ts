@@ -27,7 +27,7 @@ export const loadObject =
 
         const path = archeType.getColumn(c.loadable).path[index];
 
-        if(path === 0) { //why is it 0?
+        if(path === 0 || entId === 0) { //why is it 0?
           return;
         }
 
@@ -84,15 +84,29 @@ export const loadObject =
 
         if(w.entityManager.hasComponent(entId, c.character)) {
           mesh.rotationQuaternion = null;
-          mesh.rotation.y = Math.PI;
-          // mesh.rotate(new Vector3(-1, 0, 0), 0.5);
-          mesh.rotation.x = -0.5;
+          // mesh.rotation.y = Math.PI;
+          // // mesh.rotate(new Vector3(-1, 0, 0), 0.5);
+          // mesh.rotation.x = -0.5;
         }
 
 
-        if (w.entityManager.hasComponent(entId, c.position)) {
-          const position = w.entityManager.getComponent(entId, c.position)[w.entityManager.getArchTypeId(entId)];
-          mesh.position = position;
+        if (w.entityManager.hasComponent(entId, c.transform)) {
+          const position = w.entityManager.getComponent(entId, c.transform).position[w.entityManager.getArchTypeId(entId)];
+          const rotation = w.entityManager.getComponent(entId, c.transform).rotation[w.entityManager.getArchTypeId(entId)];
+          const scaling = w.entityManager.getComponent(entId, c.transform).scaling[w.entityManager.getArchTypeId(entId)];
+
+          if(position != null) {
+            mesh.position = position;
+          }
+          
+          if(rotation != null) {
+            mesh.rotation = rotation;
+          }
+          
+          if(scaling != null) {
+            mesh.scaling = scaling;
+          }
+
         }
 
         if (w.entityManager.hasComponent(entId, c.projectionCylinders)) {
