@@ -27,8 +27,14 @@ export const loadObject =
 
         const path = archeType.getColumn(c.loadable).path[index];
 
+        if(path === 0) { //why is it 0?
+          return;
+        }
+
         w.entityManager.removeComponent(entId, c.loadable);
 
+        console.log(path);
+        
         const result = await SceneLoader.ImportMeshAsync("", path);
 
         let mesh = result.meshes[0];
