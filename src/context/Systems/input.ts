@@ -3,6 +3,7 @@ import { GridStatus, MountOrientation, MovementStatus, ObjectHelpers } from "../
 import ISystem, { IAnimation } from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
 import { Config } from "../constants";
+import { animateProjectionCube, animateProjectionPlane } from "./projection";
 
 
 export const followMouse = ({ world: w, components: c, entities: e }: ISystem) => async () => {
@@ -121,6 +122,8 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
     if(!projMesh.isEnabled())
     {
       projMesh.setEnabled(true);
+      projMesh.scaling.y = 0;
+      projMesh.scaling.z = 0;
       projMesh.attachToBone(charMesh.getChildMeshes()[0].skeleton!.bones[0], charMesh);  
     }
     const highlight = w.entityManager.getComponent(e.highlight, c.highlight)[0];
@@ -153,56 +156,8 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
       overlay.setEnabled(true);
       projection.setEnabled(true);
 
-      const animations = w.entityManager.getComponent(e.projectionPlane, c.standardAnimation)[0];
-      animations.push(
-          {
-          name: "scalex",
-          fps: 30,
-          property: "scaling.x",
-          enabled: true,
-          startFrame: 0,
-          created: false,
-          loop: false,
-          callback : () => {
-          },
-          animationType: Animation.ANIMATIONTYPE_FLOAT,
-          keyFrames: [
-            {
-              frame: 0, 
-              value: 0,
-            },
-            {
-              frame: 5, 
-              value: width,
-            }, 
-          ]
-        }
-      )
-
-      animations.push(
-        {
-        name: "scaley",
-        fps: 30,
-        property: "scaling.y",
-        enabled: true,
-        startFrame: 0,
-        created: false,
-        loop: false,
-        callback : () => {
-        },
-        animationType: Animation.ANIMATIONTYPE_FLOAT,
-        keyFrames: [
-          {
-            frame: 0, 
-            value: 0,
-          },
-          {
-            frame: 5, 
-            value: height,
-          }, 
-        ]
-      }
-    )
+      animateProjectionCube({ world: w, components: c, entities: e }, projEntId, height, width);
+     
     }
   }
 
