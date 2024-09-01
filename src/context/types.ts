@@ -87,6 +87,5 @@ export interface IConfig {
   exposure: number,
   contrast: number,
 
-  projectionPlaneWidth: number,
-  projectionPlaneHeight: number,
+  animationBlendingSpeed: number
 }

@@ -12,12 +12,14 @@ const initProjectionPlane = ({ world: w, components: c, entities: e }: ISystem) 
   projection.scaling.x = 0;
   projection.scaling.y = 0;
   projection.rotation.x -= 0.2;
+  projection.renderingGroupId = 1;
 
   // (projection.material as StandardMaterial).diffuseTexture = new VideoTexture("video", "videos/illyria.webm", w.scene, true);
 
 
   const overlay = MeshBuilder.CreatePlane("plane", {width: 1, height: 1, sideOrientation: Mesh.DOUBLESIDE});
   overlay.position.y = 1;
+  overlay.renderingGroupId = 2;
   overlay.visibility = 0.01;
   overlay.isPickable = false;
   overlay.material = new StandardMaterial("std", w.scene);

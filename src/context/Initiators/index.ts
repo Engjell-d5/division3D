@@ -16,6 +16,19 @@ import initHighlightLayer from "./initHighlightLayer";
 
 
 const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
+  
+  
+  for( const landmarkDef of Landmarks) {
+    const landmark = w.entityManager.create();
+    w.entityManager.addComponent(landmark, c.loadable, {path: landmarkDef.path});
+    // w.entityManager.addComponent(landmark, c.flat);
+    w.entityManager.addComponent(landmark, c.position, landmarkDef.position);
+    w.entityManager.addComponent(landmark, c.clickable);
+    w.entityManager.addComponent(landmark, c.prop);
+    w.entityManager.addComponent(landmark, c.content, {type: landmarkDef.contentType, path: landmarkDef.contentPath, width: landmarkDef.contentWidth, height: landmarkDef.contentHeight});
+    w.entityManager.addComponent(landmark, c.shadows, { casts: true, receives: true});
+  }
+  
   e.platform = w.entityManager.create();
   w.entityManager.addComponent(e.platform, c.loadable, {
     path: "assets/models/platform.glb"
@@ -55,18 +68,6 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   const dome = w.entityManager.create();
   w.entityManager.addComponent(dome, c.loadable, {path: "assets/models/dome.glb"});
 
-
-  for( const landmarkDef of Landmarks) {
-    const landmark = w.entityManager.create();
-    w.entityManager.addComponent(landmark, c.loadable, {path: landmarkDef.path});
-    // w.entityManager.addComponent(landmark, c.flat);
-    w.entityManager.addComponent(landmark, c.position, landmarkDef.position);
-    w.entityManager.addComponent(landmark, c.clickable);
-    w.entityManager.addComponent(landmark, c.prop);
-    w.entityManager.addComponent(landmark, c.content, {type: landmarkDef.contentType, path: landmarkDef.contentPath, width: landmarkDef.contentWidth, height: landmarkDef.contentHeight});
-    w.entityManager.addComponent(landmark, c.shadows, { casts: true, receives: true});
-
-  }
 };
 
 const initWorld = (props: ISystem) => {
@@ -81,7 +82,7 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.vignetteColor = new Color4(0, 0.0, 1.0, 0);
   props.world.scene.imageProcessingConfiguration.vignetteStretch = 5;
   props.world.scene.fogEnabled =  true;
-  props.world.scene.fogDensity = 0.012;
+  props.world.scene.fogDensity = 0.013;
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
 

@@ -12,14 +12,14 @@ export const Landmarks : Array<ILandmark> = [
     contentWidth: -2,
     contentHeight: 1
   },
-  // {
-  //   position: new Vector3(-4, 0, -2),
-  //   path: "assets/models/plane.glb",
-  //   contentType: 0,
-  //   contentPath: "videos/tmt.mp4",
-  //   contentWidth: -2,
-  //   contentHeight: 1
-  // }
+  {
+    position: new Vector3(1.5, 0, 2),
+    path: "assets/models/plane.glb",
+    contentType: 0,
+    contentPath: "videos/tmt.mp4",
+    contentWidth: -2,
+    contentHeight: 1
+  }
 ];
 
 export const Config : IConfig = {
@@ -46,8 +46,7 @@ export const Config : IConfig = {
     toneMappingType: ImageProcessingConfiguration.TONEMAPPING_ACES,
     exposure: 1.5,
     contrast: 1.5,
-
-    projectionPlaneWidth :2,
-    projectionPlaneHeight: 1
+    
+    animationBlendingSpeed: 0.05,
 }
   

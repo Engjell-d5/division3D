@@ -4,6 +4,7 @@ import ISystem from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
 import "@babylonjs/loaders";
 import { GridMaterial } from "@babylonjs/materials";
+import { Config } from "../constants";
 
 
 export const loadObject =
@@ -39,8 +40,8 @@ export const loadObject =
 
           w.scene.animationGroups[0].enableBlending = true;
           w.scene.animationGroups[1].enableBlending = true;
-          w.scene.animationGroups[0].blendingSpeed = 0.1;
-          w.scene.animationGroups[1].blendingSpeed = 0.1;
+          w.scene.animationGroups[0].blendingSpeed = Config.animationBlendingSpeed;
+          w.scene.animationGroups[1].blendingSpeed = Config.animationBlendingSpeed;
         }
 
         // console.log(mesh);
