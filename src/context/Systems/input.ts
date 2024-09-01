@@ -3,7 +3,7 @@ import { GridStatus, MountOrientation, MovementStatus, ObjectHelpers } from "../
 import ISystem, { IAnimation } from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
 import { Config } from "../constants";
-import { animateProjectionCube, animateProjectionPlane } from "./projection";
+import { animateProjectionCube, animateProjectionPlane, startCharacterAnimation, stopCharacterAnimation } from "./projection";
 
 
 export const followMouse = ({ world: w, components: c, entities: e }: ISystem) => async () => {
@@ -82,6 +82,7 @@ export const mouseUp = ({ world: w, components: c, entities: e }: ISystem) => as
 
   (projection.material as StandardMaterial).diffuseTexture?.dispose();
   w.entityManager.removeComponent(e.character, c.onCutscene);
+  startCharacterAnimation({ world: w, components: c, entities: e });
 
   
 };
@@ -122,7 +123,7 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
     if(!projMesh.isEnabled())
     {
       projMesh.setEnabled(true);
-      projMesh.scaling.y = 0;
+      projMesh.scaling.x = 0;
       projMesh.scaling.z = 0;
       projMesh.attachToBone(charMesh.getChildMeshes()[0].skeleton!.bones[0], charMesh);  
     }
@@ -155,7 +156,8 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
 
       overlay.setEnabled(true);
       projection.setEnabled(true);
-
+      
+      stopCharacterAnimation({ world: w, components: c, entities: e });
       animateProjectionCube({ world: w, components: c, entities: e }, projEntId, height, width);
      
     }

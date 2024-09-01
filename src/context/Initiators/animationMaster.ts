@@ -1,6 +1,7 @@
 import { GlowLayer, HemisphericLight, Animation } from "@babylonjs/core";
 import ISystem, { IAnimation, ICutSceneMaster } from "../types";
 import { Config } from "../constants";
+import { startCharacterAnimation } from "../Systems/projection";
 
 const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) => {
   
@@ -45,7 +46,9 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
         endFrame: 90,
         type: 1,
         started: false,
-        animation: { step: 1, currentFrame: 0, property: "intensity", minValue: 0, maxValue: 0.5, duration: 60, callback : () => {}, animationMaster: e.animationMaster }
+        animation: { step: 1, currentFrame: 0, property: "intensity", minValue: 0, maxValue: 0.5, duration: 60, callback : () => {
+          startCharacterAnimation({ world: w, components: c, entities: e });
+        }, animationMaster: e.animationMaster }
       },
       {
         entity : e.character,

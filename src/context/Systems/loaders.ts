@@ -32,6 +32,11 @@ export const loadObject =
 
         let mesh = result.meshes[0];
 
+        if(w.entityManager.hasComponent(entId, c.character))
+        {
+          w.scene.animationGroups[0].stop();
+        }
+
         // console.log(mesh);
 
         for (const mesh of result.meshes) {

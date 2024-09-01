@@ -103,9 +103,9 @@ export const animateStandard = ({ world: w, components: c, entities: e }: ISyste
             if(animation.currentFrame < animation.duration)
             {
                 entity[animation.property] = ((animation.maxValue as number) - (animation.minValue as number)) * (animation.currentFrame / animation.duration);
-                animation.callback();
                 animation.currentFrame += animation.step;
             } else {
+                animation.callback();
                 indexToRemove = animIndex;
             }
             animIndex += 1;

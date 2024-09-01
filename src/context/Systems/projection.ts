@@ -1,6 +1,6 @@
 import ISystem from "../types";
 
-import { Animation } from "@babylonjs/core";
+import { Animation, Skeleton } from "@babylonjs/core";
 
 export const animateProjectionPlane = ({ world: w, components: c, entities: e }: ISystem, height: number, width: number)  => {
     let animations = w.entityManager.getComponent(e.projectionPlane, c.standardAnimation)[0];
@@ -91,7 +91,7 @@ export const animateProjectionCube = ({ world: w, components: c, entities: e }: 
         projAnimations.push({
           name: "scaleyplane",
           fps: 30,
-          property: "scaling.y",
+          property: "scaling.x",
           enabled: true,
           startFrame: 0,
           created: false,
@@ -111,5 +111,15 @@ export const animateProjectionCube = ({ world: w, components: c, entities: e }: 
           ]
         });
     
+}
+
+
+export const stopCharacterAnimation = ({ world: w, components: c, entities: e }: ISystem)  => {
+    w.scene.animationGroups[0].stop();
+}
+
+export const startCharacterAnimation = ({ world: w, components: c, entities: e }: ISystem)  => {
+    w.scene.animationGroups[0].start();
+    w.scene.animationGroups[0].loopAnimation = true;
 }
 
