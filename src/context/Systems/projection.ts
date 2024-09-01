@@ -115,11 +115,16 @@ export const animateProjectionCube = ({ world: w, components: c, entities: e }: 
 
 
 export const stopCharacterAnimation = ({ world: w, components: c, entities: e }: ISystem)  => {
-    w.scene.animationGroups[0].stop();
+    w.scene.animationGroups[0].start();
+    w.scene.animationGroups[0].loopAnimation = true;
+    w.scene.animationGroups[1].stop();
+
 }
 
 export const startCharacterAnimation = ({ world: w, components: c, entities: e }: ISystem)  => {
-    w.scene.animationGroups[0].start();
-    w.scene.animationGroups[0].loopAnimation = true;
+    w.scene.animationGroups[1].start();
+    w.scene.animationGroups[1].loopAnimation = true;
+    w.scene.animationGroups[0].stop();
+
 }
 

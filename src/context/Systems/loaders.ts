@@ -35,6 +35,12 @@ export const loadObject =
         if(w.entityManager.hasComponent(entId, c.character))
         {
           w.scene.animationGroups[0].stop();
+          w.scene.animationGroups[1].stop();
+
+          w.scene.animationGroups[0].enableBlending = true;
+          w.scene.animationGroups[1].enableBlending = true;
+          w.scene.animationGroups[0].blendingSpeed = 0.2;
+          w.scene.animationGroups[1].blendingSpeed = 0.2;
         }
 
         // console.log(mesh);
@@ -46,6 +52,8 @@ export const loadObject =
           {
             mesh.isPickable = false;
           }
+
+         
 
           mesh.name = entId;
 
