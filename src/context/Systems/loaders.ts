@@ -39,8 +39,8 @@ export const loadObject =
 
           w.scene.animationGroups[0].enableBlending = true;
           w.scene.animationGroups[1].enableBlending = true;
-          w.scene.animationGroups[0].blendingSpeed = 0.2;
-          w.scene.animationGroups[1].blendingSpeed = 0.2;
+          w.scene.animationGroups[0].blendingSpeed = 0.1;
+          w.scene.animationGroups[1].blendingSpeed = 0.1;
         }
 
         // console.log(mesh);
