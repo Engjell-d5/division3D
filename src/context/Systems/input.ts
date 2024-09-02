@@ -191,5 +191,11 @@ export const scroll = ({ world: w, components: c, entities: e }: ISystem) => asy
 
   const backward = (referenceMesh as Mesh).forward; // Get the backward direction by negating the forward vector
   referenceMesh.position.addInPlace(backward.scale(5)); // Move the mesh along the backward direction
+
+  const directionalLight = w.entityManager.getComponent(e.directionalLight, c.light)[w.entityManager.getArchTypeId(e.directionalLight)];
+  let lightDirection = directionalLight.direction.clone();
+  const rotationMatrix = Matrix.RotationY(-delta);
+  lightDirection = Vector3.TransformNormal(lightDirection, rotationMatrix);
+  directionalLight.direction = lightDirection.normalize(); // Update the light's direction
   
 };
