@@ -1,9 +1,9 @@
-import { Matrix, Color3, AbstractMesh, Mesh, Vector3, Animation, StandardMaterial, VideoTexture, HighlightLayer } from "@babylonjs/core";
+import { Matrix, Color3, AbstractMesh, Mesh, Vector3, Animation, StandardMaterial, VideoTexture, HighlightLayer, Axis, Space } from "@babylonjs/core";
 import { GridStatus, MountOrientation, MovementStatus, ObjectHelpers } from "../enums";
 import ISystem, { IAnimation } from "../types";
 import { QueryType } from "@/ecs/utilities/Types";
 import { Config } from "../constants";
-import { animateProjectionCube, animateProjectionPlane, startCharacterAnimation, stopCharacterAnimation } from "./projection";
+import { animateProjectionCube, animateProjectionPlane, startCharacterAnimation, startProjectionCube, stopCharacterAnimation } from "./projection";
 
 
 export const followMouse = ({ world: w, components: c, entities: e }: ISystem) => async () => {
@@ -33,7 +33,16 @@ export const followMouse = ({ world: w, components: c, entities: e }: ISystem) =
 
 
       if(target.pickedMesh && target.pickedPoint && target.pickedMesh.name === "referencePlane"){
-        mesh.lookAt(new Vector3(-target.pickedPoint.x, -target.pickedPoint.y, target.pickedPoint.z));
+
+        const camera = w.entityManager.getComponent(e.camera, c.camera)[0];
+
+        const referenceMesh = w.entityManager.getComponent(e.referencePlane, c.mesh)[w.entityManager.getArchTypeId(e.referencePlane)];
+
+        const position = target.pickedPoint.negate();
+        position.addInPlace(referenceMesh.forward.scale(10));
+
+        mesh.lookAt(position);
+
         (highlight as HighlightLayer).removeAllMeshes();
 
       } else if(target.pickedMesh && target.pickedPoint) {
@@ -119,14 +128,8 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
       return;
     }
 
+    startProjectionCube({ world: w, components: c, entities: e }, projMesh, charMesh);
 
-    if(!projMesh.isEnabled())
-    {
-      projMesh.setEnabled(true);
-      projMesh.scaling.x = 0;
-      projMesh.scaling.z = 0;
-      projMesh.attachToBone(charMesh.getChildMeshes()[0].skeleton!.bones[0], charMesh);  
-    }
     const highlight = w.entityManager.getComponent(e.highlight, c.highlight)[0];
     (highlight as HighlightLayer).removeAllMeshes();
 
@@ -164,4 +167,29 @@ export const mouseDown = ({ world: w, components: c, entities: e }: ISystem) => 
   }
 
  
+};
+
+
+export const scroll = ({ world: w, components: c, entities: e }: ISystem) => async (event: any) => {
+  const [cameraArchetype] = w.query.with(c.camera).execute();
+
+  if(!cameraArchetype)
+  {
+    return;
+  }
+  
+  const camera = cameraArchetype.getColumn(c.camera)[0];
+
+  const delta = event.deltaY * -0.0012; // Adjust the sensitivity as needed
+  camera.alpha += delta; // Modify alpha to rotate horizontally
+
+  const referenceMesh = w.entityManager.getComponent(e.referencePlane, c.mesh)[w.entityManager.getArchTypeId(e.referencePlane)];
+  // referenceMesh.visibility = 1;
+
+  referenceMesh.position = Vector3.Zero();
+  referenceMesh.rotation.y -= delta;
+
+  const backward = (referenceMesh as Mesh).forward; // Get the backward direction by negating the forward vector
+  referenceMesh.position.addInPlace(backward.scale(5)); // Move the mesh along the backward direction
+  
 };

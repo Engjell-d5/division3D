@@ -84,9 +84,10 @@ export const loadObject =
 
         if(w.entityManager.hasComponent(entId, c.character)) {
           mesh.rotationQuaternion = null;
-          // mesh.rotation.y = Math.PI;
-          // // mesh.rotate(new Vector3(-1, 0, 0), 0.5);
-          // mesh.rotation.x = -0.5;
+
+          const camera = w.entityManager.getComponent(e.camera, c.camera)[0];
+          camera.lockedTarget = mesh;
+         
         }
 
 

@@ -1,7 +1,7 @@
 import { GlowLayer, HemisphericLight, Animation } from "@babylonjs/core";
 import ISystem, { IAnimation, ICutSceneMaster } from "../types";
 import { Config } from "../constants";
-import { startCharacterAnimation } from "../Systems/projection";
+import { startCharacterAnimation, startProjectionCube } from "../Systems/projection";
 
 const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) => {
   
@@ -98,6 +98,16 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
           callback: () => {
             w.entityManager.removeComponent(e.character, c.onCutscene);
             w.entityManager.addComponent(e.platform, c.rotatable);
+
+            const [archetype] = w.query.with(c.projectionCylinders).execute();
+
+            const charMesh = w.entityManager.getComponent(e.character, c.mesh)[0];
+
+            const projectionMesh = archetype.getColumn(c.mesh)[0];
+            // projectionMesh.setEnabled(true);
+
+            // startProjectionCube({ world: w, components: c, entities: e }, projectionMesh, charMesh);
+
           },
           loop: false,
           animationType: Animation.ANIMATIONTYPE_FLOAT,

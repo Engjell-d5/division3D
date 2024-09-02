@@ -1,6 +1,6 @@
 import ISystem from "../types";
 
-import { Animation, Skeleton } from "@babylonjs/core";
+import { Animation, Mesh, Skeleton } from "@babylonjs/core";
 
 export const animateProjectionPlane = ({ world: w, components: c, entities: e }: ISystem, height: number, width: number)  => {
     let animations = w.entityManager.getComponent(e.projectionPlane, c.standardAnimation)[0];
@@ -113,6 +113,15 @@ export const animateProjectionCube = ({ world: w, components: c, entities: e }: 
     
 }
 
+export const startProjectionCube = ({ world: w, components: c, entities: e }: ISystem, projMesh: Mesh, charMesh: Mesh) => {
+  if(!projMesh.isEnabled())
+    {
+      projMesh.setEnabled(true);
+      projMesh.scaling.x = 0;
+      projMesh.scaling.z = 0;
+      projMesh.attachToBone(charMesh.getChildMeshes()[0].skeleton!.bones[0], charMesh);  
+    }
+}
 
 export const stopCharacterAnimation = ({ world: w, components: c, entities: e }: ISystem)  => {
     w.scene.animationGroups[0].start();

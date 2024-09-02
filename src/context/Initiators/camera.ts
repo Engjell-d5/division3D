@@ -23,15 +23,18 @@ const initCamera = (props: ISystem) => {
 
   w.entityManager.addComponent(e.camera, c.camera, arcRotateCamera);
 
-  arcRotateCamera.attachControl(w.canvas);
+  arcRotateCamera.attachControl(w.canvas, true);
 
   arcRotateCamera.lowerRadiusLimit = 0;
   arcRotateCamera.radius = 1;
   arcRotateCamera.upperRadiusLimit = Config.cameraUpperLimit;
-  arcRotateCamera.lowerAlphaLimit = Config.cameraLowerAlpha;
-  arcRotateCamera.upperAlphaLimit = Config.cameraUpperAlpha;
+  arcRotateCamera.alpha = Config.cameraLowerAlpha;
+  // arcRotateCamera.lowerAlphaLimit = Config.cameraLowerAlpha;
+  // arcRotateCamera.upperAlphaLimit = Config.cameraUpperAlpha;
   arcRotateCamera.lowerBetaLimit = Config.cameraLowerBeta;
   arcRotateCamera.upperBetaLimit = Config.cameraUpperBeta;
+
+  arcRotateCamera.inputs.clear();
 
   arcRotateCamera.wheelPrecision = 1 / Config.cameraScrollSpeed;
   arcRotateCamera.fov = Config.cameraFOV;

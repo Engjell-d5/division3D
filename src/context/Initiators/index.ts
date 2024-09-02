@@ -55,7 +55,7 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(e.character, c.character);
   w.entityManager.addComponent(e.character, c.onCutscene);
   w.entityManager.addComponent(e.character, c.shadows, { casts: true, receives: true});
-  w.entityManager.addComponent(e.character, c.transform, { position: null, rotation: new Vector3(-0.5, Math.PI, 0), scaling: null})
+  w.entityManager.addComponent(e.character, c.transform, { position: Vector3.Zero(), rotation: new Vector3(-0.5, Math.PI, 0), scaling: null})
 
 
   const terrain = w.entityManager.create();
@@ -87,7 +87,7 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.vignetteColor = new Color4(0, 0.0, 1.0, 0);
   props.world.scene.imageProcessingConfiguration.vignetteStretch = 5;
   props.world.scene.fogEnabled =  true;
-  props.world.scene.fogDensity = 0.013;
+  props.world.scene.fogDensity = 0.012;
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
 
