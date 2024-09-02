@@ -101,12 +101,12 @@ const initAnimationMaster = ({ world: w, components: c, entities: e }: ISystem) 
 
             const [archetype] = w.query.with(c.projectionCylinders).execute();
 
-            const charMesh = w.entityManager.getComponent(e.character, c.mesh)[0];
+            const charMesh = w.entityManager.getComponent(e.character, c.mesh)[w.entityManager.getArchTypeId(e.character)];
 
             const projectionMesh = archetype.getColumn(c.mesh)[0];
             // projectionMesh.setEnabled(true);
 
-            // startProjectionCube({ world: w, components: c, entities: e }, projectionMesh, charMesh);
+            startProjectionCube({ world: w, components: c, entities: e }, projectionMesh, charMesh);
 
           },
           loop: false,

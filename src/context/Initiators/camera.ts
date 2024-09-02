@@ -18,6 +18,11 @@ const initCamera = (props: ISystem) => {
 
   const dfp = new DefaultRenderingPipeline("default", true, w.scene, [arcRotateCamera], true);
   dfp.samples = 4;
+  // dfp.bloomEnabled = true;
+  // dfp.bloomKernel = 2;
+  // dfp.bloomScale = 2;
+  // dfp.bloomThreshold = 0.1;
+  // dfp.bloomWeight = 2;
 
 
 

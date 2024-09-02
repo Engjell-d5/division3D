@@ -197,5 +197,18 @@ export const scroll = ({ world: w, components: c, entities: e }: ISystem) => asy
   const rotationMatrix = Matrix.RotationY(-delta);
   lightDirection = Vector3.TransformNormal(lightDirection, rotationMatrix);
   directionalLight.direction = lightDirection.normalize(); // Update the light's direction
+
+  const projection = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).projection[w.entityManager.getArchTypeId(e.projectionPlane)];
+  const overlay = w.entityManager.getComponent(e.projectionPlane, c.projectionPlane).overlay[w.entityManager.getArchTypeId(e.projectionPlane)];
+
+  overlay.position = Vector3.Zero();
+  projection.position = Vector3.Zero();
+
+  overlay.setEnabled(true);
+  projection.setEnabled(true);
+
+  overlay.rotation.y -= delta;
+  projection.rotation.y -= delta;
+
   
 };
