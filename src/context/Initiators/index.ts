@@ -64,10 +64,10 @@ const tempInitRoom = ({ world: w, components: c, entities: e }: ISystem) => {
   w.entityManager.addComponent(terrain, c.shadows, { casts: false, receives: true});
 
   
-  const tree = w.entityManager.create();
-  w.entityManager.addComponent(tree, c.loadable, {path: "assets/models/tree.glb"});
-  w.entityManager.addComponent(tree, c.shadows, { casts: true, receives: true});
-  w.entityManager.addComponent(tree, c.transform, { position: new Vector3(5, 0, -1), rotation: Vector3.Zero(), scaling: Vector3.One()});
+  // const tree = w.entityManager.create();
+  // w.entityManager.addComponent(tree, c.loadable, {path: "assets/models/tree.glb"});
+  // w.entityManager.addComponent(tree, c.shadows, { casts: true, receives: true});
+  // w.entityManager.addComponent(tree, c.transform, { position: new Vector3(5, 0, -1), rotation: Vector3.Zero(), scaling: Vector3.One()});
 
 
   const dome = w.entityManager.create();
@@ -87,7 +87,7 @@ const initWorld = (props: ISystem) => {
   props.world.scene.imageProcessingConfiguration.vignetteColor = new Color4(0, 0.0, 1.0, 0);
   props.world.scene.imageProcessingConfiguration.vignetteStretch = 5;
   props.world.scene.fogEnabled =  true;
-  props.world.scene.fogDensity = 0.012;
+  props.world.scene.fogDensity = 0.014;
   props.world.scene.fogColor = Color3.Red();
   props.world.scene.fogMode = Scene.FOGMODE_EXP2;
 
