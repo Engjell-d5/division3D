@@ -54,5 +54,8 @@ export const Config: IConfig = {
   exposure: 1.5,
   contrast: 1.5,
 
+
+
+  
   animationBlendingSpeed: 0.05,
 }
